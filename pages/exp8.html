@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashpal's Resume</title>
+    <style>
+        /* --- CSS styles start here --- */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resume-container {
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            box-sizing: border-box; /* Include padding in the element's total width and height */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        section p, section ul {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        section ul {
+            list-style: none; /* Remove default bullet points */
+            padding-left: 0;
+        }
+
+        section ul li {
+            margin-bottom: 5px;
+        }
+
+        .contact-info p {
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .objective p {
+            text-align: justify;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr; /* Two columns: one for label, one for value */
+            gap: 0px 10px;
+            align-items: baseline;
+        }
+
+        .details-grid p {
+            margin: 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        .footer .signature {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        /* --- CSS styles end here --- */
+    </style>
+</head>
+<body>
+        <button id="downloadPdf">Download Resume as PDF</button>
+
+    <div class="resume-container">
+        <h1>Resume</h1>
+
+        <section class="contact-info">
+            <p><strong>Name:-</strong> Yashpal</p>
+            <p><strong>Address:-</strong> Vill & Post- Samra</p>
+            <p><strong>District:-</strong> Agra</p>
+            <p><strong>Pincode:-</strong> 283110</p>
+            <p><strong>State:-</strong> Uttar Pradesh</p>
+            <p><strong>Contact No:-</strong>9368481759</p>
+            <p><strong>E-Mail-</strong>ys7900235903@gmail.com</p>
+        </section>
+
+        <section class="objective">
+            <h2>➤ Objective</h2>
+            <p>I am an ambitious person ready to accept challenges in any part of the world with ability to handle various task simultaneously to all most satisfaction. I am willing where my talent can garnish to provide me a challenging and competitive environment for working in a proper way</p>
+        </section>
+
+        <section class="educational-qualification">
+            <h2>➤ Educational Qualification:</h2>
+            <ul>
+                <li><p><strong>10<sup>th</sup></strong> Passed From Rj Board 2014</p></li>
+                <li><p><strong>12<sup>th</sup></strong> Passsed From Up Board 2016</p></li>
+                <li><p><strong>B.A</strong> Passed From Dbrau Agra 2021</p></li>
+            </ul>
+        </section>
+
+        <section class="computer-knowledge">
+            <h2>➤ Computer Knowledge:</h2>
+            <ul>
+                <li><p>Basic Knowledge</p></li>
+            </ul>
+        </section>
+
+        <section class="experience">
+            <h2>➤ Experience:</h2>
+            <ul>
+                <li><p><strong>1 Year 3 Month Work Experience</strong> H M K A Micro Finance Pvt Ltd. As a Field Staff</p></li>
+                <li><p>Present Work Experience With Neo Opportunity Consultancy Pvt Ltd As a R.O</p></li>
+            </ul>
+        </section>
+
+        <section class="personal-details">
+            <h2>➤ Personal Details:</h2>
+            <div class="details-grid">
+                <p><strong>➤ Name</strong></p><p>: Yash Pal Singh</p>
+                <p><strong>➤ Fathers Name</strong></p><p>: Suresh Chandra</p>
+                <p><strong>➤ Mother Name</strong></p><p>: Vimlesh Devi</p>
+                <p><strong>➤ Dob</strong></p><p>: 01/01/2000</p>
+                <p><strong>➤ Gender</strong></p><p>: Male</p>
+                <p><strong>➤ Marritel Status</strong></p><p>: Unmarried</p>
+                <p><strong>➤ Nationlity</strong></p><p>: Indian</p>
+                <p><strong>➤ Language</strong></p><p>: Hindi</p>
+            </div>
+        </section>
+
+        <section class="footer">
+            <p>Date: ..................</p>
+            <p>Place: Agra</p>
+            <p class="signature">(Yash Pal Singh)</p>
+        </section>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        /* --- JavaScript starts here --- */
+        document.getElementById('downloadPdf').addEventListener('click', function() {
+            const element = document.querySelector('.resume-container'); // Select the div containing the resume content
+
+            // Options for html2pdf
+            const opt = {
+                margin:       [10, 10, 10, 10], // top, left, bottom, right in mm
+                filename:     'Yashpal_Resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, logging: true, useCORS: true }, // Added logging for debugging
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Using the new, more robust way to use html2pdf
+            html2pdf().set(opt).from(element).save().catch(error => {
+                console.error("PDF generation failed:", error);
+                alert("Failed to generate PDF. Check console for details.");
+            });
+        });
+        /* --- JavaScript ends here --- */
+    </script>
+</body>
+</html>

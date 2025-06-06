@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresher Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .resume-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Adjust as needed */
+            width: 100%;
+            margin-bottom: 20px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 5px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .header-contact {
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .header-contact span {
+            margin: 0 8px;
+            white-space: nowrap; /* Prevent contact details from breaking */
+        }
+        h2 {
+            color: #333;
+            font-size: 1.15em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .section-content {
+            margin-bottom: 15px;
+        }
+        .section-content p, .section-content ul {
+            margin-bottom: 8px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        li {
+            margin-bottom: 4px;
+            font-size: 0.95em;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            margin-bottom: 2px;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #333;
+            font-size: 1em;
+        }
+        .item-details {
+            font-size: 0.95em;
+            color: #444;
+            flex-basis: 100%; /* For job/degree details to be on new line */
+            margin-top: 2px;
+        }
+        .item-meta {
+            font-size: 0.9em;
+            color: #666;
+            text-align: right;
+            white-space: nowrap; /* Prevent date/location from breaking */
+            margin-left: 10px; /* Space between title and meta */
+        }
+        .item-meta.location {
+            flex-basis: 100%; /* Ensure location breaks below date in print */
+            text-align: right;
+            margin-left: 0; /* Remove margin-left if it's on a new line */
+            margin-top: -2px; /* Pull it slightly up if needed */
+        }
+
+        .education-item {
+            margin-bottom: 10px;
+        }
+        .education-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95em;
+            color: #444;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+        .education-meta .gpa {
+            font-size: 0.9em;
+            color: #666;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+        .relevant-coursework {
+            font-size: 0.95em;
+            color: #444;
+            margin-top: 5px;
+        }
+        .relevant-coursework strong {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .skills-list p {
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+        .skills-list strong {
+            font-weight: bold;
+            margin-right: 5px;
+            white-space: nowrap;
+        }
+
+        /* Editable specific styles */
+        [contenteditable="true"] {
+            border: 1px dashed #ccc;
+            padding: 3px 5px;
+            min-height: 1.2em; /* Ensure some height for empty lines */
+            outline: none;
+            cursor: text;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+            border-radius: 3px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            display: inline-block; /* Allows wrapping within the editable box */
+            width: auto; /* Allow content to dictate width */
+            max-width: 100%; /* Prevent overflow */
+        }
+        [contenteditable="true"]:hover {
+            border-color: #aaa;
+        }
+        [contenteditable="true"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            background-color: #fff;
+        }
+
+        /* Adjustments for inline editable elements */
+        .header-contact span[contenteditable="true"],
+        .skills-list p [contenteditable="true"],
+        .item-details[contenteditable="true"],
+        .education-meta [contenteditable="true"],
+        .relevant-coursework span[contenteditable="true"],
+        .item-meta[contenteditable="true"],
+        .item-meta.location[contenteditable="true"]
+         {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+            min-height: auto;
+            display: inline; /* Keep text inline */
+            box-shadow: none;
+        }
+        li[contenteditable="true"] {
+            padding: 2px 5px;
+            display: list-item; /* Ensure list item behavior */
+        }
+        p[contenteditable="true"] {
+            display: block; /* Ensure paragraph behavior */
+            width: 100%;
+        }
+        h1[contenteditable="true"] {
+            display: block;
+            width: 100%;
+        }
+
+        .download-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .download-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styles for PDF generation */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                padding: 30px; /* Adjust padding for print if needed */
+            }
+            .download-button-container {
+                display: none;
+            }
+            [contenteditable="true"] {
+                border: none !important;
+                padding: 0 !important;
+                background-color: transparent !important;
+                min-height: auto !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+            /* Specific adjustments for print layout */
+            .item-header, .education-meta {
+                flex-wrap: nowrap; /* Prevent wrapping in print */
+            }
+            .item-meta, .education-meta .gpa {
+                margin-left: 20px; /* Adjust spacing for print */
+            }
+            .item-meta.location {
+                text-align: right; /* Ensure location stays right-aligned */
+                margin-top: 0; /* Remove negative margin on print */
+            }
+            .skills-list strong {
+                white-space: normal; /* Allow wrapping in print if needed */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="download-button-container">
+        <button class="download-button" onclick="downloadResumePDF()">Download Resume as PDF</button>
+    </div>
+
+    <div class="resume-container" id="resume">
+        <header>
+            <h1 contenteditable="true">Your Name</h1>
+            <p class="header-contact">
+                <span contenteditable="true">123-456-7890</span> •
+                <span contenteditable="true">sdevil123@asu.edu</span> •
+                <span contenteditable="true">linkedin.com/in/sparkysundevil</span> •
+                <span contenteditable="true">github.com/sparkysundevil</span>
+            </p>
+        </header>
+
+        <section class="summary-section">
+            <h2>Summary</h2>
+            <p contenteditable="true">
+                Senior mechanical engineering student with internship experience in medical device manufacturing and product development. Project experience includes applications of software and hardware. Seeking full-time position May 2020 in medical device manufacturing, pharmaceutical production, and other FDA-regulated industries.
+            </p>
+        </section>
+
+        <section class="education-section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">B.S.E., Mechanical Engineering</span>
+                    <span class="item-meta" contenteditable="true">Graduating May 2020</span>
+                </div>
+                <div class="education-meta">
+                    <span contenteditable="true">Arizona State University, Tempe, AZ</span>
+                    <span class="gpa" contenteditable="true">3.82 GPA</span>
+                </div>
+                <div class="education-meta">
+                    <span contenteditable="true">Barrett, The Honors College</span>
+                </div>
+                <p class="relevant-coursework">
+                    <strong>Relevant coursework:</strong> <span contenteditable="true">Hardware Design Languages and Programmable Logic, Advanced Excel in Business</span>
+                </p>
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h2>Technical Skills</h2>
+            <div class="skills-list">
+                <p><strong>Data Analysis and Statistics:</strong> <span contenteditable="true">JMP, Minitab</span></p>
+                <p><strong>Design and Modeling Tools:</strong> <span contenteditable="true">SOLIDWORKS, LabVIEW, MATLAB, Microsoft Office</span></p>
+                <p><strong>Programming:</strong> <span contenteditable="true">Python, C, C++</span></p>
+                <p><strong>Certifications:</strong> <span contenteditable="true">National Instruments Certified LabVIEW Associate Developer (CLAD) – August 2019</span></p>
+            </div>
+        </section>
+
+        <section class="experience-section">
+            <h2>Professional Experience</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Stryker Solutions, Phoenix, AZ: Research & Dev Development Intern</span>
+                    <span class="item-meta" contenteditable="true">May 2019 – Aug 2019</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Applied measurement system analysis (MSA) to quality relocated test equipment (JMP, Python)</li>
+                    <li contenteditable="true">Authored three technical reports for relocated packaging equipment, following IQOQPP guides (JMP, Excel)</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Med Apps, Scottsdale, AZ: Quality Engineering Intern</span>
+                    <span class="item-meta" contenteditable="true">May 2018 – Aug 2018</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Assessed equivalency of proposed alternate plastic packaging material (Minitab, Excel)</li>
+                    <li contenteditable="true">Created and delivered presentations to train field sales representatives on new product features (PowerPoint)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <h2>Academic Projects</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Hand Cycle for Polio Victims</span>
+                    <span class="item-meta" contenteditable="true">Fall 2019 – Spring 2020</span>
+                </div>
+                <p contenteditable="true">Collaborated in a team of three to design model of custom hand cycle for polio victims (SOLIDWORKS).</p>
+                <ul>
+                    <li contenteditable="true">Developed team schedule, including quality measurement for each major milestone (Microsoft Project)</li>
+                    <li contenteditable="true">Ensured team compliance to Design Control Procedures according to Code of Federal Regulations (CFR)</li>
+                    <li contenteditable="true">Recognized by faculty audience as "Best Presentation" out of 15 teams</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Sensor for Quadriplegic Patients</span>
+                    <span class="item-meta" contenteditable="true">Spring 2019</span>
+                </div>
+                <p contenteditable="true">Led team of three to design and develop a mouse-like device to allow quadriplegic patients to use websites.</p>
+                <ul>
+                    <li contenteditable="true">Assessed range-of-motion data to determine feasible solutions (Python)</li>
+                    <li contenteditable="true">Created device to detect muscle flexion in neck to control the mouse click (Arduino, FPGA)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="other-work-experience-section">
+            <h2>Other Work Experience</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Arizona State University, Tempe, AZ: Tutor (10 hours/week)</span>
+                    <span class="item-meta" contenteditable="true">Aug 2018 – May 2019</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Tutored 10-15 undergraduate engineering students per week in MATLAB programming and math coursework</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Kohl’s, Gilbert, AZ: Sales Associate, Jewelry Department (16-24 hours/week)</span>
+                    <span class="item-meta" contenteditable="true">Aug 2017 – Dec 2017</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Achieved #2 highest selling associate within one month of hire date</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="activities-section">
+            <h2>Activities</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">ASU Society of Women Engineers (SWE)</span>
+                    <span class="item-meta" contenteditable="true">Aug 2017 – Present</span>
+                </div>
+                <p contenteditable="true">Multiple leadership roles, including vice-president and industry relations chair (300 members, $75k annual budget)</p>
+                <ul>
+                    <li contenteditable="true">Tutored 10-15 undergraduate engineering students per week in MATLAB programming and math coursework</li>
+                    <li contenteditable="true">Organized 2018 annual conference participation, including 8 student poster submissions</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- <div class="download-button-container">
+        <button class="download-button" onclick="downloadResumePDF()">Download Resume as PDF</button>
+    </div> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function downloadResumePDF() {
+            const element = document.getElementById('resume');
+            html2pdf(element, {
+                margin: 10,
+                filename: 'Fresher_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            });
+        }
+    </script>
+</body>
+</html>

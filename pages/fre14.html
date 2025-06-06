@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Template</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    .download-btn {
+      display: block;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      text-align: right;
+    }
+    .download-btn button {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .resume {
+      max-width: 900px;
+      background: #fff;
+      margin: auto;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 20px;
+    }
+    .left {
+      flex: 0.7;
+    }
+    .right {
+      flex: 1.3;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 16px;
+      color: #555;
+    }
+    .section {
+      margin-top: 30px;
+    }
+    .section h3 {
+      font-size: 18px;
+      border-bottom: 2px solid #333;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+    .item {
+      margin-bottom: 15px;
+    }
+    .item h4 {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .item span {
+      font-size: 13px;
+      color: #888;
+    }
+    .item p, .item li {
+      font-size: 14px;
+      color: #333;
+    }
+    .item ul {
+      padding-left: 20px;
+    }
+    .editable {
+      cursor: text;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="download-btn">
+    <button onclick="window.print()">Download Resume</button>
+  </div>
+
+  <div class="resume">
+    <div class="left">
+      <div class="section">
+        <h1 class="editable" contenteditable>NIRANJAN DEVI</h1>
+        <h2 class="editable" contenteditable>Head Manager</h2>
+        <p class="editable" contenteditable>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.</p>
+      </div>
+      <div class="section">
+        <h3>CONTACT</h3>
+        <p class="editable" contenteditable>Phone: +123-456-7890</p>
+        <p class="editable" contenteditable>Email: hello@reallygreatsite.com</p>
+        <p class="editable" contenteditable>Address: 123 Anywhere St., Any City</p>
+      </div>
+      <div class="section">
+        <h3>EDUCATION</h3>
+        <div class="item editable" contenteditable>
+          <h4>2029 - 2030</h4>
+          <p>Wardiere University - Master of Business Management</p>
+        </div>
+        <div class="item editable" contenteditable>
+          <h4>2025 - 2029</h4>
+          <p>Boreclle High School - Major in Business Management</p>
+        </div>
+      </div>
+      <div class="section">
+        <h3>SKILLS</h3>
+        <ul>
+          <li class="editable" contenteditable>Project Management</li>
+          <li class="editable" contenteditable>Public Relations</li>
+          <li class="editable" contenteditable>Teamwork</li>
+          <li class="editable" contenteditable>Leadership</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>LANGUAGES</h3>
+        <p class="editable" contenteditable>Hindi</p>
+        <p class="editable" contenteditable>English</p>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="section">
+        <h3>WORK EXPERIENCE</h3>
+        <div class="item editable" contenteditable>
+          <h4>Boreclle Company</h4>
+          <span>2030 - PRESENT | Marketing Manager & Specialist</span>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Led cross-functional marketing teams.</li>
+          </ul>
+        </div>
+        <div class="item editable" contenteditable>
+          <h4>Wardiere Company</h4>
+          <span>2025 - 2029 | Marketing Manager & Specialist</span>
+          <ul>
+            <li>Developed brand awareness strategies.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="section">
+        <h3>PROJECTS</h3>
+        <div class="item editable" contenteditable>
+          <h4>Project Phoenix</h4>
+          <p>Designed and led a nationwide campaign to increase product visibility and engagement by 60%.</p>
+        </div>
+      </div>
+      <div class="section">
+        <h3>AWARDS</h3>
+        <div class="item editable" contenteditable>
+          <h4>Best Manager</h4>
+          <span>2030 - PRESENT</span>
+          <p>Awarded for exceptional team leadership and project delivery excellence.</p>
+        </div>
+        <div class="item editable" contenteditable>
+          <h4>Best Manager</h4>
+          <span>2025 - 2029</span>
+          <p>Recognized for innovative campaign strategies and team success rates.</p>
+        </div>
+      </div>
+      <div class="section">
+        <h3>REFERENCE</h3>
+        <p class="editable" contenteditable>Aarya Agarwal | 123-456-7890 | hello@reallygreatsite.com</p>
+        <p class="editable" contenteditable>Sharya Singh | 123-456-7890 | hello@reallygreatsite.com</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

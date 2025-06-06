@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resume-container {
+            width: 210mm; /* A4 width */
+            /* height: 297mm; / / A4 height, adjusted dynamically by content */
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            overflow: hidden; /* Ensures no content spills */
+            border-radius: 8px;
+        }
+
+        .left-column {
+            flex: 0 0 35%; /* 35% width for the left column */
+            background-color: #333; /* Dark background */
+            color: #fff;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .right-column {
+            flex: 1; /* Takes remaining space */
+            background-color: #fff;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Profile Image */
+        .profile-image-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            margin-bottom: 20px;
+            background-color: #eee; /* Placeholder background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer; /* Indicate it's clickable */
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Header (in right column) */
+        .header-right {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .title {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 0;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        /* Section Titles */
+        .section-title-left,
+        .section-title-right {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-title-left {
+            color: #fff;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .section-title-right {
+            color: #333;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #333;
+        }
+
+        .section-title-left i,
+        .section-title-right i {
+            font-size: 1.2em;
+        }
+
+        /* Left Column Sections */
+        .left-column .section {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .about-me-content {
+            font-size: 0.9em;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            color: #fff;
+        }
+
+        .contact-info-item i {
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .skills-list,
+        .language-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skills-list li,
+        .language-list li {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #fff;
+        }
+
+        /* Right Column Sections */
+        .right-column .section {
+            margin-bottom: 25px;
+        }
+
+        .education-item,
+        .experience-item {
+            display: flex;
+            margin-bottom: 20px;
+            position: relative; /* For the timeline dot */
+            padding-left: 20px; /* Space for the dot */
+        }
+
+        .education-item::before,
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background-color: #333;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .education-item::after,
+        .experience-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 15px; /* Adjust to connect dots */
+            bottom: -10px; /* Extend line downwards */
+            width: 2px;
+            background-color: #ddd;
+            z-index: 0;
+        }
+        .right-column .section .education-item:last-child::after,
+        .right-column .section .experience-item:last-child::after {
+            display: none; /* Hide line for the last item in a section */
+        }
+
+
+        .edu-details,
+        .exp-details {
+            flex-grow: 1;
+            padding-left: 15px; /* Space between dot and content */
+        }
+
+        .edu-dates,
+        .exp-dates {
+            font-weight: 500;
+            color: #555;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .edu-degree,
+        .exp-role {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .edu-university,
+        .exp-company {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 5px;
+        }
+
+        .edu-gpa {
+            font-size: 0.85em;
+            color: #777;
+        }
+
+        .exp-description-list {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .exp-description-list li {
+            margin-bottom: 5px;
+        }
+
+
+        /* Editable Styles */
+        [contenteditable="true"]:focus {
+            outline: 2px solid #a0c4ff;
+            background-color: #f5faff;
+            border-radius: 3px;
+        }
+        
+        [contenteditable="true"].profile-image-text {
+            background-color: rgba(255,255,255,0.2);
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        /* Download Buttons */
+        .download-buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-button {
+            padding: 12px 25px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #downloadPng {
+            background-color: #212222;
+        }
+
+        #downloadPng:hover {
+            background-color: #353739;
+        }
+
+        #downloadPdf {
+            background-color: #dc3545; /* A distinct color for PDF */
+        }
+
+        #downloadPdf:hover {
+            background-color: #c82333;
+        }
+
+        /* Print styles (for PDF generation) */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .resume-container {
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                width: 210mm;
+                /* height: 297mm; / / Let height adjust dynamically for content flow in PDF */
+                overflow: hidden; /* Prevent scrollbars */
+            }
+            .download-buttons-container {
+                display: none; /* Hide buttons when printing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume-content">
+        <div class="left-column">
+            <div class="profile-image-container">
+                <img class="profile-image" src="https://via.placeholder.com/150/EEEEEE/888888?text=Upload+Image" alt="Profile Picture">
+            </div>
+
+            <div class="section">
+                <h3 class="section-title-left"><i class="fas fa-user"></i> ABOUT ME</h3>
+                <p class="about-me-content" contenteditable="true">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title-left"><i class="fas fa-address-book"></i> CONTACT</h3>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone-alt"></i> <span contenteditable="true">+123-456-7890</span>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i> <span contenteditable="true">hello@reallygreatsite.com</span>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i> <span contenteditable="true">123 Anywhere Street., Any City</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title-left"><i class="fas fa-cogs"></i> SKILLS</h3>
+                <ul class="skills-list">
+                    <li contenteditable="true">C Language</li>
+                    <li contenteditable="true">C++</li>
+                    <li contenteditable="true">Data Structure</li>
+                    <li contenteditable="true">Core Java</li>
+                    <li contenteditable="true">Advance Java</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title-left"><i class="fas fa-language"></i> LANGUAGE</h3>
+                <ul class="language-list">
+                    <li contenteditable="true">English</li>
+                    <li contenteditable="true">Hindi</li>
+                    <li contenteditable="true">Marathi</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <header class="header-right">
+                <h1 class="name" contenteditable="true">Your Name</h1>
+                <p class="title" contenteditable="true">Backend Developer</p>
+            </header>
+
+            <section class="section">
+                <h3 class="section-title-right"><i class="fas fa-graduation-cap"></i> EDUCATION</h3>
+                <div class="education-item">
+                    <div class="edu-details">
+                        <p class="edu-dates" contenteditable="true">(2022-2025)</p>
+                        <p class="edu-degree" contenteditable="true">Bachelor of Computer Science</p>
+                        <p class="edu-university" contenteditable="true">PUNE UNIVERSITY</p>
+                        <p class="edu-gpa" contenteditable="true">80%</p>
+                    </div>
+                </div>
+                <div class="education-item">
+                    <div class="edu-details">
+                        <p class="edu-dates" contenteditable="true">(2021-2022)</p>
+                        <p class="edu-degree" contenteditable="true">HSC</p>
+                        <p class="edu-university" contenteditable="true">Maharashtra</p>
+                        <p class="edu-gpa" contenteditable="true">80%</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title-right"><i class="fas fa-briefcase"></i> EXPERIENCE</h3>
+                <div class="experience-item">
+                    <div class="exp-details">
+                        <p class="exp-dates" contenteditable="true">(2020-2023)</p>
+                        <p class="exp-role" contenteditable="true">SENIOR GRAPHIC DESIGNER</p>
+                        <p class="exp-company" contenteditable="true">Fauget studio</p>
+                        <ul class="exp-description-list">
+                            <li contenteditable="true">create more than 100 graphic designs for big companies</li>
+                            <li contenteditable="true">complete a lot of complicated work</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="exp-details">
+                        <p class="exp-dates" contenteditable="true">(2017 - 2019)</p>
+                        <p class="exp-role" contenteditable="true">SENIOR GRAPHIC DESIGNER</p>
+                        <p class="exp-company" contenteditable="true">Iarana, inc</p>
+                        <ul class="exp-description-list">
+                            <li contenteditable="true">create more than 100 graphic designs for big companies</li>
+                            <li contenteditable="true">complete a lot of complicated work</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3 class="section-title-right"><i class="fas fa-briefcase"></i> Project</h3>
+                <div class="experience-item">
+                    <div class="exp-details">
+                        <p class="exp-role" contenteditable="true">Project Name</p>
+                        <p class="exp-company" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint, aspernatur inventore, possimus debitis tempore cupiditate dolorem necessitatibus corporis earum ipsum ullam ab iusto minus hic perferendis? Omnis, vel eius.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="download-buttons-container">
+        <button id="downloadPdf" class="download-button">Download Resume as PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to allow image upload
+            document.querySelector('.profile-image-container').addEventListener('click', function() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            document.querySelector('.profile-image').src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                };
+                input.click();
+            });
+
+            // PNG download functionality
+            document.getElementById('downloadPng').addEventListener('click', function() {
+                const element = document.getElementById('resume-content');
+                html2canvas(element, {
+                    scale: 2, // Increase scale for better resolution
+                    useCORS: true, // Required for images loaded from different origins (like placeholder.com)
+                    logging: true // Enable logging for debugging
+                }).then(function(canvas) {
+                    const link = document.createElement('a');
+                    link.download = 'my_professional_resume.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+            // PDF download functionality
+            document.getElementById('downloadPdf').addEventListener('click', function() {
+                const element = document.getElementById('resume-content');
+                html2canvas(element, {
+                    scale: 2, // Increase scale for better resolution in PDF
+                    useCORS: true,
+                    logging: true
+                }).then(function(canvas) {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' for portrait, 'mm' for millimeters, 'a4' for A4 size
+
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 297; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    // If the content is taller than one A4 page, add new pages
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    pdf.save('my_professional_resume.pdf');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

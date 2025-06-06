@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Resume</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .resume-container {
+            width: 8.5in; /* Standard letter size width */
+            height: 1300px; /* Standard letter size height */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5in;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            position: relative; /* For PDF export positioning */
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .header-left {
+            flex-grow: 1;
+        }
+
+        .name-surname {
+            font-size: 28pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            line-height: 1.1;
+        }
+
+        .job-title {
+            font-size: 14pt;
+            color: #777;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            font-size: 9pt;
+            line-height: 1.4;
+            color: #555;
+            margin-bottom: 15px;
+            padding-right: 20px; /* Space for image */
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 9pt;
+            color: #555;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 15px;
+        }
+
+        .contact-item:last-child {
+            margin-right: 0;
+        }
+
+        .contact-item img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+        }
+
+      
+
+        /* Section Styling */
+        .section-title {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Languages Section */
+        .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            font-size: 10pt;
+        }
+
+        .language-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .language-item span {
+            font-weight: bold;
+        }
+
+        .language-bar {
+            width: 100px; /* Adjust as needed */
+            height: 6px;
+            background-color: #ddd;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .language-level {
+            height: 100%;
+            background-color: #333; /* Dark fill for level */
+        }
+
+        /* Education Section */
+        .education-entry {
+            margin-bottom: 10px;
+        }
+
+        .edu-dates-location {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10pt;
+            color: #555;
+            font-style: italic;
+        }
+
+        .edu-degree {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #333;
+            margin-top: 2px;
+        }
+
+        .edu-school {
+            font-size: 10pt;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .gpa {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Skills Section */
+        .skills-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .skills-category {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 15px;
+        }
+
+        .skills-category span {
+            font-weight: bold;
+        }
+
+        /* Professional Experience */
+        .experience-entry {
+            margin-bottom: 15px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .exp-role-company {
+            font-size: 10.5pt;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .exp-bullets {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding: 0;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .exp-bullets li {
+            margin-bottom: 5px;
+        }
+
+        /* Editable Styles */
+        .editable {
+            border: 1px dashed transparent;
+            padding: 1px 3px;
+            min-height: 1em; /* Ensure some height even if empty */
+            transition: all 0.1s ease-in-out;
+            border-radius: 2px;
+            cursor: text;
+        }
+
+        .editable:hover {
+            border-color: #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .editable:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: #e6f7ff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Specific editable adjustments */
+        .name-surname.editable,
+        .job-title.editable,
+        .section-title.editable {
+            border: none; /* No dashed border for main titles */
+            background-color: transparent;
+        }
+
+        .name-surname.editable:hover,
+        .job-title.editable:hover,
+        .section-title.editable:hover {
+            background-color: transparent;
+        }
+
+        .name-surname.editable:focus,
+        .job-title.editable:focus,
+        .section-title.editable:focus {
+            box-shadow: none;
+            background-color: transparent;
+        }
+
+        .contact-item .editable,
+        .languages-list .editable,
+        .exp-bullets .editable,
+        .skills-list .editable {
+            display: inline-block; /* Or list-item for bullets */
+        }
+        .exp-bullets .editable {
+            display: list-item;
+        }
+
+        .placeholder {
+            color: #bbb;
+            font-style: italic;
+            pointer-events: none; /* Allows click through to parent editable */
+        }
+
+        /* Download Button */
+        .download-button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .download-button:active {
+            background-color: #004085;
+            transform: translateY(0);
+        }
+
+        /* Toast Notification */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px; /* Move up slightly when shown */
+        }
+    </style>
+</head>
+<body>
+     <button id="downloadPdf" class="download-button">Download PDF</button>
+
+    <div class="resume-container">
+        <div class="header">
+            <div class="header-left">
+                <div class="name-surname editable">NAME SURNAME</div>
+                <div class="job-title editable">Software Developer</div>
+                <div class="description editable">
+                    A detail-oriented and results-driven Financial Analyst with over 7 years of experience in financial analysis, forecasting, and budgeting. Proven ability to provide actionable insights through data analysis and financial modeling. Strong analytical and problem-solving skills.
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" alt="Email Icon"/>
+                        <span class="editable">name.surname@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/marker.png" alt="Location Icon"/>
+                        <span class="editable">NY, USA</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="https://img.icons8.com/ios-glyphs/30/000000/phone--v1.png" alt="Phone Icon"/>
+                        <span class="editable">+1 222 222 222</span>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="section">
+            <div class="section-title">LANGUAGES</div>
+            <div class="languages-list">
+                <div class="language-item">
+                    <span class="editable">English</span>
+                    <div class="language-bar"><div class="language-level" style="width: 90%;"></div></div>
+                </div>
+                <div class="language-item">
+                    <span class="editable">Spanish</span>
+                    <div class="language-bar"><div class="language-level" style="width: 70%;"></div></div>
+                </div>
+                <div class="language-item">
+                    <span class="editable">French</span>
+                    <div class="language-bar"><div class="language-level" style="width: 60%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">EDUCATION</div>
+            <div class="education-entry">
+                <div class="edu-dates-location">
+                    <span class="editable">20XX-20XX</span>
+                    <span class="editable gpa">GPA: 3.7/4.0</span>
+                </div>
+                <div class="edu-degree editable">Master of Business Administration</div>
+                <div class="edu-school editable">NYU</div>
+            </div>
+            <div class="education-entry">
+                <div class="edu-dates-location">
+                    <span class="editable">20XX-20XX</span>
+                </div>
+                <div class="edu-degree editable">Bachelor of Science in Finance</div>
+                <div class="edu-school editable">NYU</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">SKILLS</div>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <span class="editable">Hard:</span>
+                    <span class="editable">Financial Modeling, Excel, Word, PowerPoint, Outlook.</span>
+                </div>
+                <div class="skills-category">
+                    <span class="editable">Soft:</span>
+                    <span class="editable">Analytical thinking Problem Solving, Communication, Time Management.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">PROFESSIONAL EXPERIENCE</div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <span class="editable">Nov. 20XX - Jul. 20XX</span>
+                    <span class="editable">ABC CORPORATION</span>
+                </div>
+                <div class="exp-role-company editable">Senior Financial Analyst</div>
+                <ul class="exp-bullets">
+                    <li class="editable">Conducted comprehensive financial analysis to identify cost-saving opportunities, resulting in a 10% reduction in operational expenses.</li>
+                    <li class="editable">Developed complex financial models to support strategic decision-making, leading to a successful merger and acquisition deal worth $50 million.</li>
+                </ul>
+            </div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <span class="editable">Nov. 20XX - Jul. 20XX</span>
+                    <span class="editable">DEF INCORPORATION</span>
+                </div>
+                <div class="exp-role-company editable">Financial Planning & Analyst Manager</div>
+                <ul class="exp-bullets">
+                    <li class="editable">Conducted in-depth market research and due diligence on potential investment opportunities, resulting in the identification of a high-performing fund that generated a 20% return on investment.</li>
+                    <li class="editable">Monitored portfolio performance and recommended adjustments to maintain portfolio health, leading to consistent returns above industry benchmarks.</li>
+                </ul>
+            </div>
+            <div class="experience-entry">
+                <div class="exp-header">
+                    <span class="editable">Nov. 20XX - Jul. 20XX</span>
+                    <span class="editable">GHI INVESTMENT GROUP</span>
+                </div>
+                <div class="exp-role-company editable">Investment Analyst</div>
+                <ul class="exp-bullets">
+                    <li class="editable">Conducted in-depth market research and due diligence on potential investment opportunities, resulting in the identification of a high-performing fund that generated a 20% return on investment.</li>
+                    <li class="editable">Monitored portfolio performance and recommended adjustments to maintain portfolio health, leading to consistent returns above industry benchmarks.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div class="toast" id="toast">Resume downloaded successfully!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Editable Content Functionality ---
+            const editables = document.querySelectorAll('.editable');
+            editables.forEach(element => {
+                element.setAttribute('contenteditable', 'true');
+
+                // Add placeholder functionality
+                const checkPlaceholder = () => {
+                    if (element.textContent.trim() === '' && !element.querySelector('.placeholder')) {
+                        const placeholderSpan = document.createElement('span');
+                        placeholderSpan.classList.add('placeholder');
+                        placeholderSpan.textContent = 'Click to edit';
+                        element.appendChild(placeholderSpan);
+                    } else if (element.textContent.trim() !== '' && element.querySelector('.placeholder')) {
+                        element.removeChild(element.querySelector('.placeholder'));
+                    }
+                };
+
+                checkPlaceholder(); // Initial check on load
+
+                element.addEventListener('focus', function() {
+                    const placeholder = this.querySelector('.placeholder');
+                    if (placeholder) {
+                        this.removeChild(placeholder);
+                    }
+                });
+
+                element.addEventListener('blur', checkPlaceholder); // Re-check on blur
+            });
+
+          
+
+
+            // --- PDF Download Functionality ---
+            const downloadPdfButton = document.getElementById('downloadPdf');
+            const resumeContainer = document.querySelector('.resume-container');
+            const toast = document.getElementById('toast');
+
+            downloadPdfButton.addEventListener('click', () => {
+                // Remove contenteditable attribute temporarily for cleaner PDF
+                editables.forEach(el => el.removeAttribute('contenteditable'));
+
+                // Remove placeholders before PDF generation
+                document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'none');
+
+                const options = {
+                    margin: [0.5, 0.5, 0.5, 0.5], // Top, Left, Bottom, Right margins in inches
+                    filename: 'Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true // Important for images loaded from different origins
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().set(options).from(resumeContainer).save().then(() => {
+                    // Re-add contenteditable and placeholders after PDF generation
+                    editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+                    document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'inline'); // Or block based on context
+                    showToast('Resume downloaded successfully!');
+                }).catch(error => {
+                    console.error("Error generating PDF:", error);
+                    // Ensure editable is re-added even on error
+                    editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+                    document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'inline');
+                    showToast('Error downloading resume.', true);
+                });
+            });
+
+            // --- Toast Notification Function ---
+            function showToast(message, isError = false) {
+                toast.textContent = message;
+                if (isError) {
+                    toast.style.backgroundColor = '#dc3545'; /* Red for error */
+                } else {
+                    toast.style.backgroundColor = '#28a745'; /* Green for success */
+                }
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000); /* Hide after 3 seconds */
+            }
+        });
+    </script>
+</body>
+</html>

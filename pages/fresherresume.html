@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #f6d365);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: white;
+            padding: 20px 0;
+            animation: fadeInDown 1s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .navbar a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about-section {
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            animation: fadeInUp 1s ease-in-out;
+            text-align: left;
+        }
+
+        .about-section h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .about-section h3 {
+            font-size: 22px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .about-section ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .about-section ul li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .about-section ul li strong {
+            color: #007bff;
+        }
+
+        /* Template Container */
+        .template-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            padding: 20px;
+            gap: 20px;
+            overflow-x: auto;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Individual Template */
+        .template {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: fadeInUp 1s ease-in-out;
+            flex: 1 1 auto;
+            min-width: 200px;
+            max-width: 250px;
+        }
+
+        .template img {
+            width: 100%;
+            height: 300px;
+            border-radius: 5px;
+            transition: transform 0.3s, opacity 0.3s;
+            opacity: 0.9;
+            object-fit: cover;
+        }
+
+        /* Hover Effect */
+        .template:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .template img:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        /* Button */
+        .use-template {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            font-size: 14px;
+        }
+
+        .use-template:hover {
+            background: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .template-container {
+                gap: 10px;
+            }
+
+            .template {
+                min-width: 150px;
+                max-width: 180px;
+            }
+
+            .template img {
+                height: 200px;
+            }
+
+            .use-template {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .template {
+                min-width: 120px;
+                max-width: 140px;
+            }
+
+            .template img {
+                height: 150px;
+            }
+
+            .use-template {
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+        }
+       
+        
+    </style>
+</head>
+<body>
+    
+       
+    
+
+    <!-- Template Container -->
+    <section class="template-container">
+        <div class="template">
+            <img src="../images/img1.jpeg" alt="Template 1">
+            <button class="use-template"><a href="../pages/fre10.html" target="_self" style="text-decoration: none; color: white;">Use Template 1</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img2.png.png" alt="Template 2">
+            <button class="use-template"><a href="../pages/fre1.html" target="_self" style="text-decoration: none; color: white;">Use Template 2</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/im4.png.png" alt="Template 3">
+            <button class="use-template"><a href="../pages/fre3.html" target="_self" style="text-decoration: none; color: white;">Use Template 3</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img3.jpeg" alt="Template 4">
+            <button class="use-template"><a href="../pages/fre4.html" target="_self" style="text-decoration: none; color: white;">Use Template 4</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img5.jpeg" alt="Template 5">
+            <button class="use-template"><a href="../pages/fre5.html" target="_self" style="text-decoration: none; color: white;">Use Template 5</a></button>
+        </div>
+    </section>
+
+
+    <section class="template-container">
+        <div class="template">
+            <img src="../images/img6.png.jpg" alt="Template 6">
+            <button class="use-template"><a href="../pages/fre6.html" target="_self" style="text-decoration: none; color: white;">Use Template 6</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img7.png.jpg" alt="Template 7">
+            <button class="use-template"><a href="../pages/fre7.html" target="_self" style="text-decoration: none; color: white;">Use Template 7</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img8.png.jpg" alt="Template 8">
+            <button class="use-template"><a href="../pages/fre8.html" target="_self" style="text-decoration: none; color: white;">Use Template 8</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img9.png.jpg" alt="Template 9">
+            <button class="use-template"><a href="../pages/fre9.html" target="_self" style="text-decoration: none; color: white;">Use Template 9</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img10.png.png" alt="Template 10">
+            <button class="use-template"><a href="../pages/fre2.html" target="_self" style="text-decoration: none; color: white;">Use Template 10</a></button>
+        </div>
+    </section>
+    <section class="template-container">
+        <div class="template">
+            <img src="../images/img11.png" alt="Template 6">
+            <button class="use-template"><a href="../pages/fre11.html" target="_self" style="text-decoration: none; color: white;">Use Template 11</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img12.png" alt="Template 7">
+            <button class="use-template"><a href="../pages/fre12.html" target="_self" style="text-decoration: none; color: white;">Use Template 12</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img13.png" alt="Template 8">
+            <button class="use-template"><a href="../pages/fre13.html" target="_self" style="text-decoration: none; color: white;">Use Template 13</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img14.png" alt="Template 9">
+            <button class="use-template"><a href="../pages/fre14.html" target="_self" style="text-decoration: none; color: white;">Use Template 14</a></button>
+        </div>
+        <div class="template">
+            <img src="../images/img15.png" alt="Template 10">
+            <button class="use-template"><a href="../pages/fre15.html" target="_self" style="text-decoration: none; color: white;">Use Template 15</a></button>
+        </div>
+    </section>
+
+    <script>
+        document.querySelectorAll('.use-template').forEach(button => {
+            button.addEventListener('click', () => {
+                alert("Template selected!");
+            });
+        });
+    </script>
+</body>
+</html>

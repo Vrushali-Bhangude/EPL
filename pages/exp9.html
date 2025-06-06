@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editable Resume</title>
+  <!-- Font for better PDF rendering -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Libre Baskerville', serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .resume {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    h1, h2, h3 {
+      margin-bottom: 5px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .left h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    .left h2 {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 5px 0;
+    }
+
+    .contact {
+      text-align: right;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      table-layout: fixed;
+      word-wrap: break-word;
+    }
+
+    table th, table td {
+      border: 1px solid #000;
+      padding: 8px;
+      font-size: 14px;
+    }
+
+    .section-title {
+      background: #d3d3d3;
+      font-weight: bold;
+      padding: 6px;
+      margin-top: 20px;
+    }
+
+    ul {
+      margin: 5px 0 10px 20px;
+    }
+
+    [contenteditable]:focus {
+      outline: 2px dashed #999;
+      background-color: #ffffdd;
+    }
+
+    .download-btn {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    button {
+      background-color: #000;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    .logo {
+      width: 80px;
+    }
+
+    .right {
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+    <div class="download-btn">
+    <button onclick="downloadPDF()">Download PDF</button>
+  </div>
+</div>
+
+
+<div id="resume" class="resume" contenteditable="true">
+
+  <div class="header">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Indian_Statistical_Institute_Logo.svg/1200px-Indian_Statistical_Institute_Logo.svg.png" class="logo" alt="ISI Logo" crossorigin="anonymous" />
+    <div class="left">
+      <h1>Name</h1>
+      <h2>M.S. Quantitative Economics</h2>
+      <p>Indian Statistical Institute, Kolkata</p>
+    </div>
+    <div class="right contact">
+      Mob. +91 XXXXXXXXXX<br />
+      xxxxxx@gmail.com
+    </div>
+  </div>
+
+  <div class="section-title">Education</div>
+  <table>
+    <tr>
+      <th>Course</th>
+      <th>College/University</th>
+      <th>Year</th>
+      <th>CGPA/%</th>
+    </tr>
+    <tr>
+      <td>M.S. Quantitative Economics</td>
+      <td>Indian Statistical Institute</td>
+      <td>2021–23</td>
+      <td>xx.x</td>
+    </tr>
+    <tr>
+      <td>Bachelor’s Degree</td>
+      <td>College Name</td>
+      <td>20xx–xx</td>
+      <td>xx.x</td>
+    </tr>
+    <tr>
+      <td>Intermediate/+2</td>
+      <td>School Name</td>
+      <td>20xx</td>
+      <td>xx.x</td>
+    </tr>
+    <tr>
+      <td>High School</td>
+      <td>School Name</td>
+      <td>20xx</td>
+      <td>X.xx</td>
+    </tr>
+  </table>
+
+  <div class="section-title">Scholastic Achievements</div>
+  <ul>
+    <li>Secured X rank in xxxx [20XX]</li>
+    <li>Cleared XX [20xx]</li>
+  </ul>
+
+  <div class="section-title">Work Experience</div>
+  <ul>
+    <li><strong>Role | Company Name</strong> [Jun’XX–Aug’XX]
+      <ul>
+        <li>Worked on xxx xxxxxx</li>
+        <li>Implemented xxx xxxx</li>
+      </ul>
+    </li>
+    <li><strong>Role | Univ Name</strong> [Jun’XX–Aug’XX]
+      <ul>
+        <li>Research assistant on xxx</li>
+        <li>Analyzed data using xxx tools</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="section-title">Skills & Interests</div>
+  <ul>
+    <li><strong>Programming Languages:</strong> Java, Python, STATA, R</li>
+    <li><strong>Tools & Libraries:</strong> Scipy, Matplotlib, TensorFlow, LaTeX</li>
+    <li><strong>Interests:</strong> Data Analysis, Machine Learning</li>
+  </ul>
+
+  <div class="section-title">Projects</div>
+  <ul>
+    <li><strong>Project Heading | Instructor Name</strong> [Apr’22–Jun’22]
+      <ul>
+        <li>Worked on xxx methodology</li>
+        <li>Developed models for xxx application</li>
+      </ul>
+    </li>
+    <li><strong>Project Heading | Instructor Name</strong> [Apr’22–Jun’22]
+      <ul>
+        <li>Explored xxx dataset</li>
+        <li>Generated insights using xxx techniques</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="section-title">Relevant Courses</div>
+  <ul>
+    <li><strong>ISI-D:</strong> Econometrics, Statistics, Mathematical Methods, Microeconomics, Macroeconomics, Game Theory</li>
+    <li><strong>Bachelor’s:</strong> Econometrics, Mathematical Methods, Statistics, Micro/Macro Economics</li>
+  </ul>
+
+  <div class="section-title">Positions of Responsibility</div>
+  <ul>
+    <li><strong>PoR | Institute/Club/Body</strong> [Apr’22–Jun’22]
+      <ul>
+        <li>Coordinated xxx activities</li>
+        <li>Led planning of xxx events</li>
+      </ul>
+    </li>
+    <li><strong>PoR | Institute/Club/Body</strong> [Apr’22–Jun’22]
+      <ul>
+        <li>Managed volunteers for xxx</li>
+        <li>Organized outreach initiatives</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="section-title">Extracurricular Activities</div>
+  <ul>
+    <li>Member of xxx club</li>
+    <li>Volunteered in xxx program</li>
+    <li>Participated in xxx competitions</li>
+  </ul>
+
+
+
+<!-- PDF export library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  function downloadPDF() {
+    const element = document.getElementById("resume");
+
+    // Disable editing temporarily
+    element.setAttribute("contenteditable", "false");
+
+    // Use a short delay to allow style reflow before export
+    setTimeout(() => {
+      const opt = {
+        margin: 0.3,
+        filename: 'Resume_ISI_Style.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: {
+          scale: 4,               // Higher scale = better quality
+          useCORS: true,          // Enables cross-origin images
+          allowTaint: false,
+          logging: true
+        },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+
+      html2pdf().set(opt).from(element).save().then(() => {
+        element.setAttribute("contenteditable", "true");
+      }).catch(err => {
+        console.error("PDF Download Failed:", err);
+        element.setAttribute("contenteditable", "true");
+        alert("Failed to download PDF. Please try again.");
+      });
+    }, 300); // Delay to allow rendering
+  }
+</script>
+</body>
+</html>
