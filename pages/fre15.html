@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Resume</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg-light: #f2f4f8;
+      --bg-dark: #1e1e1e;
+      --text-light: #2c3e50;
+      --text-dark: #ecf0f1;
+      --panel-light: #ffffff;
+      --panel-dark: #34495e;
+      --accent-light: #3498db;
+      --accent-dark: #2980b9;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-light);
+      margin: 0;
+      padding: 20px 0;
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #downloadPdf {
+      display: block; /* Make the button a block-level element */
+      margin: 10px auto 20px auto; /* Center the button horizontally with some top/bottom margin */
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #downloadPdf:hover {
+      background-color: #0056b3;
+    }
+
+    .resume-container {
+      max-width: 800px;
+      margin: auto;
+      background: var(--panel-light);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: background-color 0.3s;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      color: var(--text-light);
+      text-align: center;
+    }
+
+    .header-info {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-light);
+      border-bottom: 2px solid #d1d8e0;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+    }
+
+    .content-block {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .declaration {
+      margin-top: 30px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .signature-block {
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .signature-block p {
+      margin: 5px 0;
+    }
+
+    [contenteditable] {
+      outline: 1px dashed transparent;
+      transition: outline 0.2s;
+    }
+
+    [contenteditable]:hover,
+    [contenteditable]:focus {
+      outline: 1px dashed var(--accent-light);
+      background-color: #f0f9ff;
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .dark-mode .resume-container {
+      background: var(--panel-dark);
+    }
+
+    .dark-mode .section-title {
+      border-color: #7f8c8d;
+    }
+
+    .dark-mode [contenteditable]:hover,
+    .dark-mode [contenteditable]:focus {
+      outline: 1px dashed var(--accent-dark);
+      background-color: #34495e;
+    }
+
+    .dark-mode th {
+      background-color: #555;
+      color: var(--text-dark);
+    }
+
+    .dark-mode table, .dark-mode th, .dark-mode td {
+      border-color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .resume-container {
+        margin: 10px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="downloadPdf" onclick="downloadPDF()">Download Resume as PDF</button>
+
+  <div class="resume-container" id="resume">
+    <h1 contenteditable="true">RESUME</h1>
+
+    <div class="header-info" contenteditable="true">
+      YOUR NAME<br>
+      A/P XXX, Tal:-XXXX<br>
+      Dist:- Ahmednagar, 414502<br>
+      Mb.NO: +91-89XXXXXXXX<br>
+      Email ID :-example06@gmail.com
+    </div>
+
+    <div class="section-title">CAREER OBJECTIVE</div>
+    <p class="content-block" contenteditable="true">
+      "To Enhance my skill-sets by working in a challenging and competitive environment while at the same time contributing to the growth and progress of the organization by putting in best efforts towards mutual growth".
+    </p>
+
+    <div class="section-title">EDUCATIONAL QUALIFICATION</div>
+    <table contenteditable="true">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>University/Board</th>
+          <th>Year of Passing</th>
+          <th>Percentage (%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SSC</td>
+          <td>STATE BOARD</td>
+          <td>2021</td>
+          <td>85.00</td>
+        </tr>
+        <tr>
+          <td>HSC</td>
+          <td>STATE BOARD</td>
+          <td>2023</td>
+          <td>71.80</td>
+        </tr>
+        <tr>
+          <td>T.Y.BSC(COMPUTER SCIENCE)</td>
+          <td>PUNE</td>
+          <td>2025</td>
+          <td>Appear</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">LANGUAGE KNOWN</div>
+    <div class="content-block" contenteditable="true">
+      <ul>
+        <li>Marathi</li>
+        <li>English</li>
+        <li>Hindi</li>
+      </ul>
+
+    </div>
+
+    <div class="section-title">EXPERIENCE</div>
+    <p class="content-block" contenteditable="true">FRESHER</p>
+
+    <div class="content-block">
+      <p contenteditable="true"><strong>Operating System</strong> : Windows 7, Windows 10, Ubuntu.</p>
+      <p contenteditable="true"><strong>Designing Language</strong> : HTML</p>
+      <p contenteditable="true"><strong>Database</strong> : MY/SQL.</p>
+      <p contenteditable="true"><strong>Programming Language</strong> : C,DS, Java</p>
+    </div>
+
+    <div class="section-title">PERSONAL DETAILS</div>
+    <div class="content-block">
+      <p contenteditable="true"><strong>NAME</strong> :</p>
+      <p contenteditable="true"><strong>ADDRESS</strong> :</p>
+      <p contenteditable="true"><strong>DATE OF BIRTH</strong> : </p>
+      <p contenteditable="true"><strong>NATIONALITY</strong> : </p>
+      <p contenteditable="true"><strong>MARITAL STATUS</strong> : </p>
+      <p contenteditable="true"><strong>GENDER</strong> : </p>
+      <p contenteditable="true"><strong>EMAIL ID</strong> : </p>
+    </div>
+
+    <!-- <div class="declaration" contenteditable="true">
+      I hereby declare that all the information given above is true to the best of my knowledge and belief.
+    </div> -->
+
+    <div class="signature-block">
+      <p contenteditable="true">Place:- </p>
+      <p contenteditable="true">Date:</p>
+      <p contenteditable="true">Your Sincerely</p>
+      <p contenteditable="true"><strong>(YOUR NAME)</strong></p>
+    </div>
+  </div>
+
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById('resume');
+      const opt = {
+        margin:       0.5,
+        filename:     'Sarika_Balasaheb_Udage_Resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().set(opt).from(element).save();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avinash Padala - Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column; /* Allows content and button to stack */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box; /* Ensures padding is included in element's total width/height */
+        }
+
+        /* Resume Container */
+        .resume-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Adjust as needed */
+            width: 100%;
+            margin-bottom: 20px; /* Space above the download button */
+            box-sizing: border-box;
+            position: relative; /* For print media queries */
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .contact-info h1 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        .contact-info p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            flex-shrink: 0; /* Prevent the image from shrinking */
+            margin-left: 20px;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Section Headings */
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        /* List Styles for Sections */
+        .section ul {
+            list-style: disc; /* Use disc for bullet points */
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .section ul li {
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .degree {
+            font-weight: bold;
+        }
+
+        /* Personal Details Section (Grid Layout) */
+        .personal-details-section .details-grid {
+            display: grid;
+            grid-template-columns: auto 10px 1fr; /* Label, colon, Value */
+            gap: 8px;
+            align-items: baseline; /* Align text baselines */
+        }
+
+        .personal-details-section .details-grid > div {
+            color: #444;
+        }
+
+        .personal-details-section .details-grid div:nth-child(3n-2) { /* First column (labels) */
+            font-weight: normal; /* Make the labels regular */
+            text-align: left;
+        }
+
+        .personal-details-section .details-grid div:nth-child(3n-1) { /* Second column (colon) */
+            text-align: center;
+        }
+
+        /* Editable Content Styling */
+        [contenteditable="true"]:focus {
+            outline: 1px dashed #007bff; /* Visual cue for editing */
+            background-color: #e6f7ff;
+        }
+
+        /* Footer Section */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .signature p, .name-signature p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .name-signature p {
+            font-weight: bold;
+        }
+
+        /* Download Button */
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            flex-shrink: 0; /* Prevent button from shrinking */
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* --- PRINT SPECIFIC STYLES FOR PDF CONVERSION --- */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                -webkit-print-color-adjust: exact; /* Crucial for background colors/shadows to print */
+                print-color-adjust: exact;
+                display: block; /* Override flex for print layout */
+            }
+
+            .resume-container {
+                box-shadow: none; /* Remove shadow for print */
+                border-radius: 0; /* No border-radius in print */
+                padding: 15mm 20mm; /* Standard A4 margins */
+                width: 210mm; /* A4 width */
+                min-height: 297mm; /* A4 height */
+                box-sizing: border-box;
+                margin-bottom: 0; /* No margin below container for print */
+            }
+
+            button {
+                display: none; /* Hide the download button when printing */
+            }
+
+            /* Remove outline and background for contenteditable elements when printing */
+            [contenteditable="true"] {
+                outline: none !important;
+                background-color: transparent !important;
+            }
+
+            /* Aggressive reset for print to avoid rendering issues */
+            * {
+                float: none !important;
+                position: static !important;
+                box-shadow: none !important;
+                text-shadow: none !important;
+                filter: none !important;
+                -webkit-box-sizing: border-box !important;
+                -moz-box-sizing: border-box !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Page breaking control */
+            .section, .section ul li, .personal-details-section .details-grid div, .footer {
+                page-break-inside: avoid; /* Keep content blocks together */
+            }
+            h1, h2, .header, .contact-info p, .profile-photo {
+                page-break-after: avoid; /* Keep headings and related info with their content */
+            }
+
+            /* Font size adjustments for print (using pt for precision) */
+            .contact-info h1 { font-size: 16pt; margin-bottom: 4pt; }
+            .contact-info p { font-size: 8.5pt; }
+            h2 { font-size: 10.5pt; margin-top: 15pt; margin-bottom: 10pt; padding-bottom: 4pt; border-bottom: 1pt solid #333;}
+            .section ul li { font-size: 9.5pt; margin-bottom: 6pt; }
+            .personal-details-section .details-grid > div { font-size: 9.5pt; }
+            .footer p { font-size: 8.5pt; }
+
+            /* Specific spacing adjustments for print */
+            .header { margin-bottom: 15mm; padding-bottom: 10mm; }
+            .section { margin-bottom: 15mm; }
+            .profile-photo { margin-left: 15mm; }
+            .footer { margin-top: 25mm; padding-top: 15mm; }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <div class="header">
+            <div class="contact-info">
+                <h1 contenteditable="true">AVINASH PADALA</h1>
+                <p>Email id: <a href="mailto:avinashpdlxx@gmail.com" contenteditable="true">avinashpdlxx@gmail.com</a></p>
+                <p contenteditable="true">Mobile No: 8500XXXX75</p>
+                <p contenteditable="true">Address: H No: 8-145, Ganesh Nagar, Madhruawada, Visakhapatnam 5300045.</p>
+            </div>
+            <div class="profile-photo">
+                <img src="https://via.placeholder.com/100" alt="Profile Photo">
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 contenteditable="true">CAREER OBJECTIVE</h2>
+            <ul>
+                <li contenteditable="true">Obtain a responsible position in an organization with the best capabilities, skills and knowledge.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 contenteditable="true">ACADEMIC QUALIFICATION</h2>
+            <ul>
+                <li contenteditable="true"><span class="degree">12<sup>th</sup></span> from Narayana Jr College.</li>
+                <li contenteditable="true"><span class="degree">10<sup>th</sup></span> from St Theresa High school.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 contenteditable="true">PROFESSIONAL SKILLS</h2>
+            <ul>
+                <li contenteditable="true">Basic knowledge of computer.</li>
+                <li contenteditable="true">Typing</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2 contenteditable="true">WORK EXPERIENCE</h2>
+            <ul>
+                <li contenteditable="true">Fresher</li>
+            </ul>
+        </div>
+
+        <div class="section personal-details-section">
+            <h2 contenteditable="true">PERSONAL DETAILS</h2>
+            <div class="details-grid">
+                <div contenteditable="true">Father's Name</div><div>:</div><div contenteditable="true">Ram Mohan P</div>
+                <div contenteditable="true">Date of birth</div><div>:</div><div contenteditable="true">05 April 2002</div>
+                <div contenteditable="true">Gender</div><div>:</div><div contenteditable="true">Male</div>
+                <div contenteditable="true">Nationality</div><div>:</div><div contenteditable="true">Indian</div>
+                <div contenteditable="true">Marital Status</div><div>:</div><div contenteditable="true">Unmarried</div>
+                <div contenteditable="true">Languages Known</div><div>:</div><div contenteditable="true">English & Telugu</div>
+                <div contenteditable="true">Hobbies</div><div>:</div><div contenteditable="true">Playing Cricket</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="signature">
+                <p contenteditable="true">Place:</p>
+                <p contenteditable="true">Date:</p>
+            </div>
+            <div class="name-signature">
+                <p contenteditable="true">Avinash P</p>
+            </div>
+        </div>
+    </div>
+
+    <button id="downloadPdf">Download as PDF</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadPdfButton = document.getElementById('downloadPdf');
+            const resumeContainer = document.querySelector('.resume-container');
+
+            downloadPdfButton.addEventListener('click', () => {
+                const opt = {
+                    margin: [0.5, 0.5, 0.5, 0.5], // Top, Left, Bottom, Right margins in inches
+                    filename: 'Avinash_Padala_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2, // Higher scale for better clarity in PDF
+                        scrollY: 0, // Ensure no scrolling issues
+                        windowWidth: resumeContainer.scrollWidth, // Use container width
+                        windowHeight: resumeContainer.scrollHeight // Use container height
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    pagebreak: { mode: ['css', 'legacy'] }
+                };
+
+                html2pdf().set(opt).from(resumeContainer).save();
+            });
+
+            // Optional: Profile Photo Upload functionality (uncomment to enable)
+            const profilePhotoImg = document.querySelector('.profile-photo img');
+            if (profilePhotoImg) {
+                profilePhotoImg.addEventListener('click', function() {
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = 'image/*';
+                    input.onchange = (e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (readerEvent) => {
+                                profilePhotoImg.src = readerEvent.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    };
+                    input.click();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

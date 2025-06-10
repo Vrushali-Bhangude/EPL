@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seema Chaudhry – UI/UX Designer</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    :root {
+      --bg-light: #f2f4f8;
+      --bg-dark: #1e1e1e;
+      --text-light: #2c3e50;
+      --text-dark: #ecf0f1;
+      --panel-light: #ffffff;
+      --panel-dark: #34495e;
+      --accent-light: #3498db;
+      --accent-dark: #2980b9;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-light);
+      margin: 0;
+      padding: 40px 0;
+      color: var(--text-light);
+      transition: background-color 0.3s, color 0.3s;
+    }
+        #downloadPdf {
+      display: block; /* Make the button a block-level element */
+      margin: 10px auto; /* Center the button horizontally with some top/bottom margin */
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+    }
+    #downloadPdf:hover {
+      background-color: #0056b3;
+    }
+
+
+    .resume-container {
+      max-width: 1000px;
+      margin: auto;
+      background: var(--panel-light);
+      display: flex;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: background-color 0.3s;
+    }
+
+    .left-panel {
+      width: 32%;
+      background-color: #f7f9fc;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      border-right: 1px solid #e0e6ed;
+    }
+
+    .right-panel {
+      width: 68%;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-light);
+    }
+
+    .job-title {
+      font-size: 16px;
+      color: #6c7a89;
+      margin-top: 5px;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-light);
+      border-bottom: 2px solid #d1d8e0;
+      padding-bottom: 5px;
+    }
+
+    .contact-info, .skills, .languages, .awards {
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .entry {
+      margin-bottom: 20px;
+    }
+
+    .entry h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .entry span {
+      font-size: 13px;
+      color: #7f8c8d;
+    }
+
+    .entry p {
+      font-size: 14px;
+      color: #444;
+      margin: 8px 0 0;
+    }
+
+    .references {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .reference {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    [contenteditable] {
+      outline: 1px dashed transparent;
+      transition: outline 0.2s;
+    }
+
+    [contenteditable]:hover,
+    [contenteditable]:focus {
+      outline: 1px dashed var(--accent-light);
+      background-color: #f0f9ff;
+    }
+
+    .dark-mode {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .dark-mode .resume-container {
+      background: var(--panel-dark);
+    }
+
+    .dark-mode .section-title {
+      border-color: #7f8c8d;
+    }
+
+    .dark-mode [contenteditable]:hover,
+    .dark-mode [contenteditable]:focus {
+      outline: 1px dashed var(--accent-dark);
+      background-color: #34495e;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--accent-light);
+      color: var(--text-light);
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .resume-container {
+        flex-direction: column;
+      }
+
+      .left-panel, .right-panel {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .references {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="downloadPdf" onclick="downloadPDF()">Download Resume as PDF</button>
+
+
+  <div class="resume-container" id="resume">
+    <div class="left-panel">
+      <h1 contenteditable="true">Seema Chaudhry</h1>
+      <p class="job-title" contenteditable="true">UI/UX Designer</p>
+
+      <div class="section-title">Contact</div>
+      <div class="contact-info" contenteditable="true">
+        📞 +123-456-7890<br>
+        📧 hello@reallygreatsite.com<br>
+        📍 123 Anywhere St., Any City<br>
+        🌐 www.reallygreatsite.com
+      </div>
+
+      <div class="section-title">Skills</div>
+      <div class="skills" contenteditable="true">
+        <ul>
+          <li>Wireframing</li>
+          <li>Prototyping</li>
+          <li>UI Design</li>
+          <li>UX Research</li>
+          <li>Interaction Design</li>
+          <li>Design Systems</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Languages</div>
+      <div class="languages" contenteditable="true">
+        <ul>
+          <li>Hindi</li>
+          <li>Arabic</li>
+          <li>English</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Awards</div>
+      <div class="awards" contenteditable="true">
+        <ul>
+          <li>Best UX Design [2023]</li>
+          <li>Top UI/UX Design Award [2022]</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="section-title">Summary</div>
+      <p contenteditable="true">Creative and detail-oriented UI/UX designer with 5+ years of experience designing engaging user interfaces and experiences. Skilled in turning complex problems into simple and intuitive solutions across mobile and web platforms.</p>
+
+      <div class="section-title">Experience</div>
+      <div class="entry" contenteditable="true">
+        <h3>UI/UX Designer <span>2020 – 2023 | Warderc Inc.</span></h3>
+        <p>Led end-to-end design for enterprise SaaS dashboard. Collaborated with product and dev teams to improve usability and reduce task time by 25%.</p>
+      </div>
+      <div class="entry" contenteditable="true">
+        <h3>UI Designer <span>2019 – 2020 | Inguide Company</span></h3>
+        <p>Redesigned mobile experience of booking app, increasing conversions by 18% through improved flow and visuals.</p>
+      </div>
+      <div class="entry" contenteditable="true">
+        <h3>Junior UX Designer <span>2017 – 2019 | Timmerman Industries</span></h3>
+        <p>Conducted user research and created wireframes for internal tools. Improved satisfaction scores by 30%.</p>
+      </div>
+
+      <div class="section-title">Projects</div>
+      <div class="entry" contenteditable="true">
+        <h3>HealthTrack App Redesign</h3>
+        <p>Redesigned the fitness tracking app UI, improving user engagement by 40%. Focused on clarity, accessibility, and seamless navigation.</p>
+      </div>
+      <div class="entry" contenteditable="true">
+        <h3>DesignRevamp B2B Platform</h3>
+        <p>Led a UX overhaul for a B2B dashboard. Created design system and interactive prototypes for stakeholder testing and development handoff.</p>
+      </div>
+
+      <div class="section-title">Education</div>
+      <div class="entry" contenteditable="true">
+        <h3>Master of Graphic Design <span>2020 – 2023 | Borecole University</span></h3>
+        <p>Specialization in branding and digital UI systems. Graduated with distinction.</p>
+      </div>
+      <div class="entry" contenteditable="true">
+        <h3>Bachelor of IT Management <span>2017 – 2020 | Borecole University</span></h3>
+        <p>Combined technical and design disciplines for a cross-functional foundation in UX technology.</p>
+      </div>
+
+      <div class="section-title">References</div>
+      <div class="references" contenteditable="true">
+        <div class="reference">
+          <strong>Farha Hasan</strong><br>
+          Warderc Inc. / CTO<br>
+          📞 +123-456-7890<br>
+          📧 hello@reallygreatsite.com
+        </div>
+        <div class="reference">
+          <strong>Riaan Chandran</strong><br>
+          Warderc Inc. / CEO<br>
+          📞 +123-456-7890<br>
+          📧 hello@reallygreatsite.com
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  function downloadPDF() {
+    const element = document.getElementById('resume');
+    const opt = {
+      margin:       0.5,
+      filename:     'Seema_Chaudhry_Resume.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
+  </script>
+</body>
+</html>

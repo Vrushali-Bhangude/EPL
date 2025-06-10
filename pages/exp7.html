@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume Template</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    #downloadPdf {
+     
+      margin-bottom: 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+    #downloadPdf:hover {
+      background-color: #0056b3;
+    }
+    .resume-container {
+      display: flex;
+      width: 210mm;
+      min-height: 297mm;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+    .left-column {
+      width: 35%;
+      background-color: #e0e6ec;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .right-column {
+      width: 65%;
+      padding: 30px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-photo-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+.profile-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+  /* 💡 Ensures perfect circle even with non-square images */
+  display: block;
+  object-position: center;
+}
+    .file-upload {
+      display: none;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .section h3 {
+      color: #333;
+      border-bottom: 2px solid #333;
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      text-transform: uppercase;
+    }
+    .contact-section p,
+    .hobbies-section p {
+      font-size: 0.9em;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .contact-section strong {
+      color: #000;
+    }
+    .watermark {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .watermark-logo {
+      width: 50px;
+      height: 50px;
+      opacity: 0.5;
+    }
+    .header-section {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .header-section h1 {
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .header-section .job-title {
+      font-size: 1.2em;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .entry {
+      margin-bottom: 15px;
+    }
+    .entry p {
+      margin: 0;
+      line-height: 1.4;
+      color: #333;
+    }
+    .entry .school,
+    .entry .company {
+      font-weight: bold;
+      color: #000;
+    }
+    .entry .dates {
+      font-style: italic;
+      color: #555;
+      font-size: 0.9em;
+    }
+    .entry .description {
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    .skills-section h3 {
+      border-color: #333;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .skill-item p {
+      width: 100px;
+      margin-right: 15px;
+      font-size: 0.9em;
+      color: #333;
+    }
+    .skill-bar {
+      flex-grow: 1;
+      height: 8px;
+      background-color: #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .skill-level {
+      height: 100%;
+      background-color: #007bff;
+      border-radius: 4px;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <!-- Download button at top -->
+  <button id="downloadPdf">Download Resume as PDF</button>
+
+  <div class="resume-container" id="resumeContent">
+    <div class="left-column">
+      <div class="profile-photo-section">
+        <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile Photo" class="profile-photo" contenteditable="true">
+        <input type="file" id="fileInput" class="file-upload" accept="image/*">
+      </div>
+
+      <div class="section contact-section">
+        <h3 contenteditable="true">CONTACT</h3>
+        <p><strong contenteditable="true">PHONE:</strong> <span contenteditable="true">678-555-0103</span></p>
+        <p><strong contenteditable="true">WEBSITE:</strong> <span contenteditable="true">Website goes here</span></p>
+        <p><strong contenteditable="true">EMAIL:</strong> <span contenteditable="true">someone@example.com</span></p>
+      </div>
+
+      <div class="section hobbies-section">
+        <h3 contenteditable="true">HOBBIES</h3>
+        <p contenteditable="true">Hobby #1</p>
+        <p contenteditable="true">Hobby #2</p>
+        <p contenteditable="true">Hobby #3</p>
+      </div>
+
+      <div class="watermark">
+        <img src="https://via.placeholder.com/50x50?text=W" alt="Watermark" class="watermark-logo">
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="header-section">
+        <h1 contenteditable="true">NAME HERE</h1>
+        <p class="job-title" contenteditable="true">JOB TITLE HERE</p>
+      </div>
+
+      <div class="section education-section">
+        <h3 contenteditable="true">EDUCATION</h3>
+        <div class="entry">
+          <p class="school" contenteditable="true">[School Name]</p>
+          <p class="dates" contenteditable="true">[Dates From] - [To]</p>
+          <p class="description" contenteditable="true">It's okay to brag about your GPA, awards, and honors. Feel free to summarize your coursework too.</p>
+        </div>
+        <div class="entry">
+          <p class="school" contenteditable="true">[School Name]</p>
+          <p class="dates" contenteditable="true">[Dates From] - [To]</p>
+          <p class="description" contenteditable="true">It's okay to brag about your GPA, awards, and honors. Feel free to summarize your coursework too.</p>
+        </div>
+      </div>
+
+      <div class="section work-experience-section">
+        <h3 contenteditable="true">WORK EXPERIENCE</h3>
+        <div class="entry">
+          <p class="company" contenteditable="true">[Company Name] | [Job Title]</p>
+          <p class="dates" contenteditable="true">[Dates From] - [To]</p>
+          <p class="description" contenteditable="true">Describe your responsibilities and achievements in terms of impact and results. Use examples but keep it short.</p>
+        </div>
+        <div class="entry">
+          <p class="company" contenteditable="true">[Company Name] | [Job Title]</p>
+          <p class="dates" contenteditable="true">[Dates From] - [To]</p>
+          <p class="description" contenteditable="true">Describe your responsibilities and achievements in terms of impact and results. Use examples but keep it short.</p>
+        </div>
+        <div class="entry">
+          <p class="company" contenteditable="true">[Company Name] | [Job Title]</p>
+          <p class="dates" contenteditable="true">[Dates From] - [To]</p>
+          <p class="description" contenteditable="true">Describe your responsibilities and achievements in terms of impact and results. Use examples but keep it short.</p>
+        </div>
+      </div>
+
+      <div class="section skills-section">
+        <h3 contenteditable="true">SKILLS</h3>
+        <div class="skill-item">
+          <p contenteditable="true">Skill #1</p>
+          <div class="skill-bar"><div class="skill-level" style="width: 80%;"></div></div>
+        </div>
+        <div class="skill-item">
+          <p contenteditable="true">Skill #2</p>
+          <div class="skill-bar"><div class="skill-level" style="width: 70%;"></div></div>
+        </div>
+        <div class="skill-item">
+          <p contenteditable="true">Skill #3</p>
+          <div class="skill-bar"><div class="skill-level" style="width: 90%;"></div></div>
+        </div>
+        <div class="skill-item">
+          <p contenteditable="true">Skill #4</p>
+          <div class="skill-bar"><div class="skill-level" style="width: 75%;"></div></div>
+        </div>
+        <div class="skill-item">
+          <p contenteditable="true">Skill #5</p>
+          <div class="skill-bar"><div class="skill-level" style="width: 60%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script>
+    document.getElementById('downloadPdf').addEventListener('click', () => {
+      html2pdf().set({
+        margin: [10,10,10,10],
+        filename: 'my_resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, dpi: 192, letterRendering: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).from(document.getElementById('resumeContent')).save();
+    });
+
+    const img = document.getElementById('profileImage');
+    const fileInput = document.getElementById('fileInput');
+    img.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = ev => img.src = ev.target.result;
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>

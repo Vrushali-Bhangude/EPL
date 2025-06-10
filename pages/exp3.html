@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Template 7</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .resume-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            max-width: 850px; /* Slightly wider to match typical resume width */
+            width: 100%;
+            margin-bottom: 20px;
+            margin-top:40px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .header-contact {
+            text-align: center;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .header-contact span {
+            margin: 0 8px;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 1.3em;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .section-content p, .section-content ul {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        li {
+            margin-bottom: 4px;
+        }
+        .subsection-title {
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline; /* Align text baselines */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+            margin-bottom: 5px;
+        }
+        .item-title {
+            font-weight: bold;
+            color: #333;
+        }
+        .item-details {
+            font-size: 0.95em;
+            color: #444;
+            flex-basis: 100%; /* For job/degree details to be on new line */
+            margin-top: 2px;
+        }
+        .item-meta {
+            font-size: 0.9em;
+            color: #666;
+            text-align: right;
+            white-space: nowrap; /* Prevent date/location from breaking */
+            margin-left: 10px; /* Space between title and meta */
+        }
+        .item-meta.location {
+            flex-basis: 100%; /* Ensure location breaks below date */
+            text-align: right;
+        }
+        .project-meta, .education-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 2px;
+            flex-wrap: wrap;
+        }
+        .project-meta span, .education-meta span {
+            display: inline-block; /* Ensure they stay on the same line if possible */
+        }
+        .project-meta .technologies {
+            font-style: italic;
+            margin-left: auto; /* Push to the right */
+        }
+        .education-item {
+            margin-bottom: 15px;
+        }
+
+        /* Editable specific styles */
+        [contenteditable="true"] {
+            border: 1px dashed #ccc;
+            padding: 3px 5px;
+            min-height: 1.2em; /* Ensure some height for empty lines */
+            outline: none;
+            cursor: text;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+            border-radius: 3px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        [contenteditable="true"]:hover {
+            border-color: #aaa;
+        }
+        [contenteditable="true"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            background-color: #fff;
+        }
+        /* Remove border for specific editable elements that are part of a larger line */
+        .header-contact [contenteditable="true"],
+        .subsection-title [contenteditable="true"],
+        .item-details [contenteditable="true"],
+        .project-meta [contenteditable="true"],
+        .education-meta [contenteditable="true"] {
+            border: none;
+            padding: 0;
+            background-color: transparent;
+            min-height: auto;
+            display: inline;
+        }
+        /* Add some padding for lists */
+        li[contenteditable="true"] {
+            padding: 2px 5px;
+        }
+
+        .download-button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .download-button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        .download-button:hover {
+            background-color: #218838;
+        }
+
+        /* Styles for PDF generation (hide buttons, highlight editable areas) */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .resume-container {
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0;
+                padding: 30px; /* Adjust padding for print if needed */
+            }
+            .download-button-container {
+                display: none;
+            }
+            [contenteditable="true"] {
+                border: none !important;
+                padding: 0 !important;
+                background-color: transparent !important;
+                min-height: auto !important;
+                box-shadow: none !important;
+                outline: none !important;
+            }
+            /* Specific adjustments for print layout */
+            .item-header, .project-meta, .education-meta {
+                flex-wrap: nowrap; /* Prevent wrapping in print */
+            }
+            .item-meta, .project-meta .technologies {
+                margin-left: 20px; /* Adjust spacing for print */
+            }
+            .education-meta span:first-child {
+                flex-grow: 1; /* Push the other span to the right */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-button-container">
+        <button class="download-button" onclick="downloadResumePDF()">Download Resume as PDF</button>
+    </div>
+
+    <div class="resume-container" id="resume">
+        <header>
+            <h1 contenteditable="true">Alex Webb</h1>
+            <p class="header-contact">
+                <span contenteditable="true">555-123-4567</span> |
+                <span contenteditable="true">alex@email.com</span> |
+                <span contenteditable="true">linkedin.com/in/alexwebb</span> |
+                <span contenteditable="true">github.com/alexwebbx</span>
+            </p>
+        </header>
+
+        <section class="summary-section">
+            <h2>Summary</h2>
+            <p contenteditable="true">
+                Passionate AI/ML engineer with a strong background in deep learning, computer vision, and natural language processing. Skilled in Python, TensorFlow, PyTorch, and various ML libraries. Excellent problem-solving, research, and collaboration abilities. Seeking a challenging role to develop cutting-edge AI solutions.
+            </p>
+        </section>
+
+        <section class="skills-section">
+            <h2>Technical Skills</h2>
+            <div class="section-content">
+                <p class="subsection-title">Programming Languages: <span contenteditable="true">Python, C++, SQL, MATLAB</span></p>
+                <p class="subsection-title">Deep Learning Frameworks: <span contenteditable="true">TensorFlow, PyTorch, Keras, Caffe</span></p>
+                <p class="subsection-title">Libraries & Tools: <span contenteditable="true">NumPy, Pandas, Scikit-learn, OpenCV, NLTK, Git, Docker</span></p>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <h2>Projects</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Image Captioning System</span>
+                    <span class="item-meta" contenteditable="true">Jan 2023 - Present</span>
+                </div>
+                <div class="project-meta">
+                    <span contenteditable="true">Deep Learning Project</span>
+                    <span class="technologies" contenteditable="true">Python, TensorFlow, OpenCV</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Developed an end-to-end system for generating descriptive captions for images</li>
+                    <li contenteditable="true">Utilized CNN and LSTM models for image feature extraction and caption generation</li>
+                    <li contenteditable="true">Achieved state-of-the-art performance on the COCO dataset</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Sentiment Analysis API</span>
+                    <span class="item-meta" contenteditable="true">Aug 2022 - Dec 2022</span>
+                </div>
+                <div class="project-meta">
+                    <span contenteditable="true">Natural Language Processing</span>
+                    <span class="technologies" contenteditable="true">Python, Flask, NLTK, Hugging Face</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Built a RESTful API for sentiment analysis of text data</li>
+                    <li contenteditable="true">Implemented pre-trained transformer models using Hugging Face</li>
+                    <li contenteditable="true">Deployed the API on a cloud platform for easy integration</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="experience-section">
+            <h2>Experience</h2>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">AI Research Intern</span>
+                    <span class="item-meta" contenteditable="true">June 2022 – Aug 2022</span>
+                </div>
+                <div class="item-header">
+                    <span class="item-details" contenteditable="true">DeepMind</span>
+                    <span class="item-meta location" contenteditable="true">London, UK</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Conducted research on reinforcement learning algorithms for robotics</li>
+                    <li contenteditable="true">Implemented and evaluated deep RL models using PyTorch and RLLib</li>
+                    <li contenteditable="true">Presented findings at weekly research meetings</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Machine Learning Engineer</span>
+                    <span class="item-meta" contenteditable="true">Jan 2021 – May 2022</span>
+                </div>
+                <div class="item-header">
+                    <span class="item-details" contenteditable="true">Acme AI Solutions</span>
+                    <span class="item-meta location" contenteditable="true">San Francisco, CA</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Developed and deployed machine learning models for various industries</li>
+                    <li contenteditable="true">Optimized model performance and ensured data quality</li>
+                    <li contenteditable="true">Collaborated with cross-functional teams to deliver AI solutions</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="education-section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">Stanford University</span>
+                    <span class="item-meta" contenteditable="true">Stanford, CA</span>
+                </div>
+                <div class="education-meta">
+                    <span contenteditable="true">M.S. in Computer Science, Artificial Intelligence</span>
+                    <span contenteditable="true">Aug 2019 – May 2021</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <span class="item-title" contenteditable="true">University of California, Berkeley</span>
+                    <span class="item-meta" contenteditable="true">Berkeley, CA</span>
+                </div>
+                <div class="education-meta">
+                    <span contenteditable="true">B.S. in Electrical Engineering and Computer Science</span>
+                    <span contenteditable="true">Aug 2015 – May 2019</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="certifications-section">
+            <h2>Certifications</h2>
+            <ul>
+                <li contenteditable="true">AWS Certified Machine Learning - Specialty</li>
+                <li contenteditable="true">TensorFlow Developer Certificate</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- <div class="download-button-container">
+        <button class="download-button" onclick="downloadResumePDF()">Download Resume as PDF</button>
+    </div> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function downloadResumePDF() {
+            const element = document.getElementById('resume');
+            html2pdf(element, {
+                margin: 10,
+                filename: 'Alex_Webb_Resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            });
+        }
+    </script>
+</body>
+</html>

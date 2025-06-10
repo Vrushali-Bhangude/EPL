@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Last - Resume</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5; /* Slightly tighter line-height for resume */
+            margin: 20px auto;
+            padding: 0 20px;
+            max-width: 850px; /* Slightly wider to match image */
+            background-color: #f4f4f4;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* Resume Container */
+        .resume-container {
+            background-color: #fff;
+            padding: 40px; /* Generous padding */
+            border-radius: 4px; /* Subtle rounding */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
+            position: relative;
+            overflow: hidden; /* Clears floats within */
+            min-height: 297mm; /* Ensure it's at least A4 height for better print rendering */
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            margin-bottom: 25px; /* Spacing below header */
+        }
+
+        header h1 {
+            font-size: 2.5em; /* Larger name */
+            margin-bottom: 8px; /* Space between name and contact info */
+            color: #222; /* Darker name */
+            text-transform: capitalize; /* As seen in image */
+        }
+
+        .contact-info {
+            font-size: 0.9em;
+            color: #555;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        }
+
+        .contact-info span {
+            margin: 0 10px; /* More space between contact details */
+            white-space: nowrap; /* Prevent individual contact items from breaking */
+        }
+        .contact-info a {
+            color: #555;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Section Headings */
+        h2 {
+            font-size: 1.15em; /* Smaller, uppercase section titles */
+            color: #222;
+            margin-bottom: 12px; /* Space below section title */
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd; /* Subtle border below section titles */
+            padding-bottom: 4px; /* Space between text and border */
+            display: block; /* Ensures border spans full width */
+            font-weight: bold; /* Match image */
+        }
+
+        /* List Styles (used for summaries, skills, bullet points) */
+        ul {
+            list-style-type: disc;
+            padding-left: 20px; /* Standard indent for bullets */
+            margin-top: 5px; /* Closer to the heading */
+            margin-bottom: 10px; /* Space after list */
+        }
+
+        ul li {
+            margin-bottom: 4px; /* Tighter spacing between list items */
+        }
+
+        /* Experience and Project Item Styling */
+        .section-block {
+            margin-bottom: 25px; /* Space between major sections */
+            /* No border-bottom here as h2 has it */
+        }
+
+        .experience-item, .project-item {
+            margin-bottom: 15px; /* Space between individual jobs/projects */
+            position: relative; /* For relative positioning of elements inside */
+        }
+        .experience-item:last-child, .project-item:last-child {
+            margin-bottom: 0; /* No bottom margin for the last item in a section */
+        }
+
+
+        .company-name, .project-title {
+            font-size: 1.05em;
+            font-weight: bold;
+            margin-bottom: 2px; /* Closer to role/date */
+        }
+
+        .role-date-location {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 8px; /* Space between role/date and bullets */
+        }
+
+        .role-date-location span {
+            font-style: normal; /* Override default italic if applied */
+        }
+
+        /* Education Specifics */
+        .education-item {
+            margin-bottom: 10px;
+        }
+        .education-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .degree-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 1em;
+            margin-bottom: 2px;
+        }
+        .university-name {
+            font-weight: bold;
+        }
+        .expected-date {
+            font-weight: normal; /* Keep date not bold */
+        }
+
+        .coursework-info {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        /* Technical Skills Specifics */
+        .skills-list {
+            list-style: none; /* Remove bullets for skills list */
+            padding-left: 0;
+            margin-top: 5px;
+        }
+        .skills-list li {
+            margin-bottom: 5px;
+        }
+        .skills-list li strong {
+            display: inline-block; /* Aligns well */
+            min-width: 80px; /* Consistent spacing for category labels */
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        /* Editable Content Styling */
+        [contenteditable="true"]:focus {
+            outline: 1px dashed #ccc;
+            background-color: #f9f9f9;
+        }
+
+        /* Download Button */
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #007bff; /* A nice blue for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* --- PRINT SPECIFIC STYLES FOR PDF CONVERSION --- */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                -webkit-print-color-adjust: exact; /* Crucial for backgrounds/colors to print */
+                print-color-adjust: exact;
+            }
+
+            .resume-container {
+                box-shadow: none; /* Remove shadow for print */
+                border-radius: 0; /* No border-radius in print */
+                padding: 15mm 20mm; /* Adjust padding for standard A4 margins */
+                width: 210mm; /* A4 width */
+                min-height: 297mm; /* A4 height */
+                box-sizing: border-box; /* Crucial for layout */
+            }
+
+            button {
+                display: none; /* Hide the download button when printing */
+            }
+
+            /* Remove outline for contenteditable elements when printing */
+            [contenteditable="true"] {
+                outline: none !important;
+                background-color: transparent !important;
+            }
+
+            /* Aggressive reset for print to avoid rendering issues */
+            * {
+                float: none !important;
+                position: static !important; /* Forces elements back to normal flow */
+                box-shadow: none !important;
+                text-shadow: none !important;
+                filter: none !important;
+                -webkit-box-sizing: border-box !important;
+                -moz-box-sizing: border-box !important;
+                box-sizing: border-box !important;
+            }
+
+            /* Page breaking control */
+            .section-block, .experience-item, .project-item, ul li {
+                page-break-inside: avoid; /* Keep content blocks together */
+            }
+            h2, .company-name, .project-title, .degree-info {
+                page-break-after: avoid; /* Keep headings with their content */
+            }
+
+            /* Font size adjustments for print */
+            header h1 { font-size: 20pt; }
+            .contact-info { font-size: 8.5pt; }
+            h2 { font-size: 11pt; border-bottom: 0.75pt solid #ddd; padding-bottom: 3pt;}
+            .company-name, .project-title { font-size: 10pt; }
+            .role-date-location { font-size: 9pt; }
+            ul li { font-size: 9.5pt; margin-bottom: 2.5pt; }
+            .education-item, .degree-info, .coursework-info { font-size: 9.5pt; }
+            .skills-list li { font-size: 9.5pt; }
+            .skills-list li strong { min-width: 60pt; } /* Adjust for print units */
+
+            /* Specific spacing adjustments for print */
+            header { margin-bottom: 10mm; }
+            .section-block { margin-bottom: 15mm; }
+            .experience-item, .project-item { margin-bottom: 10mm; }
+            .contact-info span { margin: 0 5mm; } /* Tighter spacing for print */
+        }
+    </style>
+</head>
+<body>
+    <button id="downloadPdf">Download as PDF</button>
+    <div class="resume-container">
+         
+        <header>
+            <h1 contenteditable="true">First Last</h1>
+            <div class="contact-info">
+                <span contenteditable="true">XXX-XXX-XXXX</span>
+                <span>|</span>
+                <a href="mailto:firstlast@gmail.com" contenteditable="true">firstlast@gmail.com</a>
+                <span>|</span>
+                <a href="https://linkedin.com/in/firstlast" target="_blank" contenteditable="true">linkedin.com/in/firstlast</a>
+                <span>|</span>
+                <a href="https://github.com/firstlast" target="_blank" contenteditable="true">github.com/firstlast</a>
+            </div>
+        </header>
+
+        <section class="section-block">
+            <h2 contenteditable="true">Education</h2>
+            <div class="education-item">
+                <div class="degree-info">
+                    <span contenteditable="true" class="university-name">University Name</span>
+                    <span contenteditable="true" class="expected-date">Expected May 20XX</span>
+                </div>
+                <div class="role-date-location">
+                    <span contenteditable="true">Bachelor of Science in Computer Science (GPA: 4.00 / 4.00)</span>
+                    <span contenteditable="true" class="location">City, State</span>
+                </div>
+                <div class="coursework-info">
+                    <span contenteditable="true"><strong>Relevant Coursework:</strong> Data Structures and Algorithms (C++), Prob & Stat in CS (Python), Intro to CS II (C++), Linear Algebra w/ Computational Applications (Python)</span>
+                </div>
+            </div>
+            </section>
+
+        <section class="section-block">
+            <h2 contenteditable="true">Experience</h2>
+            <div class="experience-item">
+                <div class="company-name" contenteditable="true">Company Name 1</div>
+                <div class="role-date-location">
+                    <span contenteditable="true">Software Engineer</span>
+                    <span contenteditable="true" class="date">Jan 20XX - May 20XX</span>
+                </div>
+                <div class="role-date-location">
+                    <span contenteditable="true"></span> <span contenteditable="true" class="location">City, State</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Implemented microservices architecture using Node.js and Express, improving API response time by 25% and reducing server load by 30%.</li>
+                    <li contenteditable="true">Led a cross-functional team in implementing a new feature using React and Redux, resulting in a 20% increase in user engagement within the first month.</li>
+                    <li contenteditable="true">Optimized MySQL database queries, reducing page load times by 15% and enhancing overall application performance.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="company-name" contenteditable="true">Company Name 2</div>
+                <div class="role-date-location">
+                    <span contenteditable="true">Software Engineer Intern</span>
+                    <span contenteditable="true" class="date">May 20XX - Aug 20XX</span>
+                </div>
+                <div class="role-date-location">
+                    <span contenteditable="true"></span>
+                    <span contenteditable="true" class="location">City, State</span>
+                </div>
+                <ul>
+                    <li contenteditable="true">Designed and implemented responsive user interfaces with Angular, leading to a 15% improvement in user satisfaction scores.</li>
+                    <li contenteditable="true">Introduced automated testing processes with Jest and Enzyme, increasing test coverage by 30% and reducing post-release defects by 25%.</li>
+                    <li contenteditable="true">Contributed to the adoption of agile methodologies, utilizing Jira and Confluence, improving team productivity by 15% through iterative development cycles.</li>
+                </ul>
+            </div>
+            </section>
+
+        <section class="section-block">
+            <h2 contenteditable="true">Projects</h2>
+            <div class="project-item">
+                <div class="project-title" contenteditable="true">Project Name 1 | React.js, Angular, Vue.js, Django, Flask, Python, Ruby on Rails</div>
+                <ul>
+                    <li contenteditable="true">Led the development of a microservices-based e-commerce platform using Node.js, resulting in a 40% increase in daily transactions within the first quarter.</li>
+                    <li contenteditable="true">Designed and deployed a scalable RESTful API using Django and Django REST Framework, achieving a 30% improvement in data retrieval speed.</li>
+                    <li contenteditable="true">Implemented a real-time chat feature using WebSocket and Socket.io, enhancing user engagement and reducing response time by 20%.</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title" contenteditable="true">Project Name 2 | Spring Boot, Express.js, TensorFlow, PyTorch, jQuery, Bootstrap</div>
+                <ul>
+                    <li contenteditable="true">Developed a data visualization dashboard using D3.js, providing stakeholders with real-time insights and improving decision-making processes.</li>
+                    <li contenteditable="true">Built a CI/CD pipeline using Jenkins and Docker, reducing deployment time by 40% and ensuring consistent and reliable releases.</li>
+                </ul>
+            </div>
+
+            <div class="project-item">
+                <div class="project-title" contenteditable="true">Project Name 3 | Python, Flask, Jinja2, Firebase, Bootstrap</div>
+                <ul>
+                    <li contenteditable="true">Contributed to an open-source project on GitHub, collaborating with a global community and achieving 500+ stars and 50 forks.</li>
+                    <li contenteditable="true">Implemented automated testing for a critical module using Selenium, reducing regression bugs by 30% and ensuring a more stable release cycle.</li>
+                </ul>
+            </div>
+            </section>
+
+        <section class="section-block">
+            <h2 contenteditable="true">Technical Skills</h2>
+            <ul class="skills-list">
+                <li contenteditable="true"><strong>Languages:</strong> Rust, Kotlin, Swift, Go, Scala, TypeScript, R, Perl, Haskell, Groovy, Julia, Dart</li>
+                <li contenteditable="true"><strong>Technologies:</strong> React.js, Angular, Vue.js, Django, Flask, Ruby on Rails, Spring Boot, Express.js, TensorFlow, PyTorch, jQuery, Bootstrap, Laravel, Flask, ASP.NET, Node.js, Electron, Android SDK, iOS SDK, Symfony</li>
+                <li contenteditable="true"><strong>Concepts:</strong> Compiler, Operating System, Virtual Memory, Cache Memory, Encryption, Decryption, Artificial Intelligence, Machine Learning, Neural Networks, API, Database Normalization, Agile Methodology, Cloud Computing</li>
+            </ul>
+           
+        </section>
+    </div>
+
+    <!-- <button id="downloadPdf">Download as PDF</button> -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadPdfButton = document.getElementById('downloadPdf');
+
+            downloadPdfButton.addEventListener('click', () => {
+                const element = document.querySelector('.resume-container');
+
+                html2pdf(element, {
+                    margin: [10, 10, 10, 10], // Top, Left, Bottom, Right margins in mm
+                    filename: 'First_Last_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 4, // Higher scale for better clarity in PDF
+                        logging: true, // Enable logging for debugging in browser console
+                        dpi: 300, // Higher DPI for sharper text and images
+                        letterRendering: true,
+                        useCORS: true // Essential if you have external images or fonts
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait',
+                        floatPrecision: 16 // More precise floating point calculations
+                    },
+                    pagebreak: {
+                        mode: ['avoid-all', 'css', 'legacy'] // Aggressive page break avoidance
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

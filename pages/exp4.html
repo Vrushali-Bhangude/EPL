@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience Resume 9</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+    .container {
+      display: flex;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .left, .right {
+      padding: 30px;
+    }
+    .left {
+      width: 35%;
+      background: #f2f8f6;
+    }
+    .right {
+      width: 65%;
+    }
+    h1, h2, h3 {
+      margin: 0;
+    }
+    h1 {
+      font-size: 36px;
+      color: #226e61;
+    }
+    h2 {
+      font-size: 20px;
+      color: #226e61;
+      margin-top: 30px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    p, div {
+      margin: 10px 0;
+    }
+    .editable {
+      border: 1px dashed transparent;
+      padding: 3px;
+    }
+    .editable:focus {
+      outline: none;
+      border-color: #226e61;
+      background: #eef8f4;
+    }
+    button {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 20px;
+      background: #226e61;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <button onclick="downloadPDF()">Download as PDF</button>
+
+  <div class="container" id="resume">
+    <div class="left">
+      <h1 contenteditable="true" class="editable">Your Name</h1>
+
+      <h2>OBJECTIVE</h2>
+      <p contenteditable="true" class="editable">
+        My primary objective is to provide a safe and nurturing learning environment that encourages student growth and development. I aim to facilitate engaging and challenging instruction that fosters a love for learning, critical thinking, and problem-solving skills.
+      </p>
+
+      <h2>REFERENCES</h2>
+      <p contenteditable="true" class="editable">Available upon request.</p>
+
+      <h2>ADDRESS</h2>
+      <p contenteditable="true" class="editable">987 6th Ave<br>Santa Fe, NM 76543<br>USA</p>
+
+      <h2>PHONE</h2>
+      <p contenteditable="true" class="editable">706.555.0123</p>
+
+      <h2>EMAIL</h2>
+      <p contenteditable="true" class="editable">tonnie@example.com</p>
+
+      <h2>WEBSITE</h2>
+      <p contenteditable="true" class="editable">www.interestingsite.com</p>
+    </div>
+
+    <div class="right">
+      <h2>EXPERIENCE</h2>
+      <p contenteditable="true" class="editable">JAN 20XX - AUG 20XX<br>Teacher | Balsam Elementary School | Santa Fe, NM</p>
+      <p contenteditable="true" class="editable">OCT 20XX - MAY 20XX<br>Teacher's Aide | Balsam Elementary School | Santa Fe, NM</p>
+      <p contenteditable="true" class="editable">SEP 20XX - JUN 20XX<br>Teacher's Aide | Balsam Elementary School | Santa Fe, NM</p>
+      <p contenteditable="true" class="editable">Key responsibilities: planning and delivering effective instruction across various subjects and grade levels, assessing and monitoring student progress, and providing individualized support and intervention as needed.</p>
+
+      <h2>EDUCATION</h2>
+      <p contenteditable="true" class="editable">Bellows College | Santa Fe, NM<br>Bachelor's Degree in Elementary Education</p>
+
+      <h2>COMMUNICATION</h2>
+      <p contenteditable="true" class="editable">Collaborating with colleagues, parents, and community members to support student learning and achievement is an essential responsibility of an elementary school teacher.</p>
+
+      <h2>LEADERSHIP</h2>
+      <p contenteditable="true" class="editable">As a teacher, I maintain a positive classroom environment that promotes student engagement, behavior management, and social-emotional development.</p>
+    </div>
+  </div>
+
+  <!-- <button onclick="downloadPDF()">Download as PDF</button> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    function downloadPDF() {
+      const element = document.getElementById("resume");
+      html2pdf().from(element).set({
+        margin: 0.5,
+        filename: 'Experience_Resume.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).save();
+    }
+  </script>
+</body>
+</html>

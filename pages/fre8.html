@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temp3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .resume-container {
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background-color: #002d62; /* Dark blue background */
+            color: white;
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .name {
+            font-size: 2.2em;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 0.9em;
+            margin-top: 10px;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .sidebar {
+            flex: 0 0 220px; /* Fixed width for sidebar */
+            background-color: #f5f5f5; /* Light grey background for sidebar */
+            padding: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 20px 30px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            color: #002d62; /* Dark blue for titles */
+            border-bottom: 2px solid #002d62;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Contact Section */
+        .contact-item {
+            font-size: 0.9em;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        /* Personal Details, Skills, Languages, Courses */
+        .detail-item {
+            font-size: 0.9em;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skill-list li {
+            font-size: 0.9em;
+            color: #444;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 15px; /* For bullet point space */
+        }
+
+        .skill-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #002d62; /* Dark blue bullet */
+            border-radius: 50%;
+        }
+
+        /* Profile Summary */
+        .summary-text {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Education History */
+        .education-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr; /* Fixed width for labels, rest for values */
+            gap: 8px 15px;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .edu-label {
+            font-weight: 500;
+            color: #002d62; /* Dark blue for labels */
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 1em;
+            color: #002d62;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .project-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .project-details li {
+            font-size: 0.9em;
+            color: #444;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.5;
+        }
+
+        .project-details li::before {
+            content: '-'; /* Hyphen for list item */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #002d62;
+            font-weight: bold;
+        }
+
+        /* Extra-Curricular Activity */
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .activity-list li {
+            font-size: 0.9em;
+            color: #444;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 15px;
+            line-height: 1.5;
+        }
+
+        .activity-list li::before {
+            content: '-'; /* Hyphen for list item */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #002d62;
+            font-weight: bold;
+        }
+
+
+        /* Editable Styles */
+        [contenteditable="true"]:focus {
+            outline: 2px solid #a0c4ff;
+            background-color: #f5faff;
+            border-radius: 3px;
+        }
+
+        /* Download Buttons */
+        .download-buttons-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-button {
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        #downloadPng {
+            background-color: #007bff;
+        }
+
+        #downloadPng:hover {
+            background-color: #0056b3;
+        }
+
+        #downloadPdf {
+            background-color: #28a745; /* Green for PDF */
+        }
+
+        #downloadPdf:hover {
+            background-color: #218838;
+        }
+
+
+        /* Print styles (for PDF generation) */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+            }
+            .resume-container {
+                box-shadow: none;
+                margin: 0;
+                border: none;
+                width: 210mm; /* A4 width */
+                /* height: 297mm; / / Let height adjust to content for print */
+                overflow: hidden; /* Prevent scrollbars */
+            }
+            .download-buttons-container {
+                display: none; /* Hide buttons when printing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container" id="resume-content">
+        <header class="header">
+            <h1 class="name" contenteditable="true">Your name</h1>
+            <p class="tagline" contenteditable="true">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere assumenda recusandae ullam temporibus fuga pariatur laborum eius repellendus cumque tempora odio delectus ipsum soluta odit, porro, tenetur possimus aspernatur? Repellat!</p>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <section class="section contact-section">
+                    <h2 class="section-title">GET IN CONTACT</h2>
+                    <p class="contact-item" contenteditable="true">Mobile: +91-1234567890</p>
+                    <p class="contact-item" contenteditable="true">Email: abc@gmail.com</p>
+                </section>
+
+                <section class="section personal-details-section">
+                    <h2 class="section-title">PERSONAL DETAILS</h2>
+                    <p class="detail-item" contenteditable="true">Current Location: Delhi</p>
+                    <p class="detail-item" contenteditable="true">Date of Birth: Apr 10, 2000</p>
+                </section>
+
+                <section class="section skills-section">
+                    <h2 class="section-title">SKILLS</h2>
+                    <ul class="skill-list">
+                        <li contenteditable="true">Software Development</li>
+                        <li contenteditable="true">Requirement Gathering</li>
+                        <li contenteditable="true">Release Management</li>
+                        <li contenteditable="true">Life Cycle Management</li>
+                    </ul>
+                </section>
+
+                <section class="section technical-skills-section">
+                    <h2 class="section-title">TECHNICAL SKILLS</h2>
+                    <ul class="skill-list">
+                        <li contenteditable="true">C Programming Language</li>
+                        <li contenteditable="true">Python</li>
+                        <li contenteditable="true">Java</li>
+                        <li contenteditable="true">HTML</li>
+                    </ul>
+                </section>
+
+                <section class="section languages-section">
+                    <h2 class="section-title">LANGUAGES KNOWN</h2>
+                    <ul class="skill-list">
+                        <li contenteditable="true">English</li>
+                        <li contenteditable="true">Hindi</li>
+                        <li contenteditable="true">Marathi</li>
+                    </ul>
+                </section>
+
+                <section class="section courses-certs-section">
+                    <h2 class="section-title">COURSES & CERTIFICATIONS</h2>
+                    <ul class="skill-list">
+                        <li contenteditable="true">Introduction To SQL</li>
+                        <li contenteditable="true">Java Programming</li>
+                        <li contenteditable="true">Certified Course In "Programming For Everybody"</li>
+                    </ul>
+                </section>
+            </aside>
+
+            <main class="content-area">
+                <section class="section profile-summary-section">
+                    <h2 class="section-title">PROFILE SUMMARY</h2>
+                    <p class="summary-text" contenteditable="true">
+                        A focused and goal-oriented engineering professional with zeal to make a winning career in Software Development and Testing with IT Industry.
+                        Sound understanding of the Software Development Lifecycle (SDLC) right from Requirement Analysis, Documentation (functional specifications, technical design), Coding and Testing (preparation of test cases along with implementation) to maintenance of proposed applications.
+                    </p>
+                </section>
+
+                <section class="section education-history-section">
+                    <h2 class="section-title">EDUCATION HISTORY</h2>
+                    <div class="education-grid">
+                        <div class="edu-label" contenteditable="true">Graduation</div>
+                        <div class="edu-value" contenteditable="true">B.Tech/B.E.(Computers)</div>
+                        <div class="edu-label" contenteditable="true">Course</div>
+                        <div class="edu-value" contenteditable="true">HRIT</div>
+                        <div class="edu-label" contenteditable="true">College</div>
+                        <div class="edu-value" contenteditable="true">2021</div>
+                        <div class="edu-label" contenteditable="true">Year of Passing</div>
+                        <div class="edu-value" contenteditable="true"></div>
+                    </div>
+                </section>
+
+                <section class="section projects-section">
+                    <h2 class="section-title">PROJECTS</h2>
+                    <div class="project-item">
+                        <h3 class="project-title" contenteditable="true">Currency Counter, 2 Months</h3>
+                        <ul class="project-details">
+                            <li contenteditable="true">The currency counter automatically counted the currency notes and calculated their amount by sensing the paper currency using color sensor and Arduino</li>
+                            <li contenteditable="true">The color sensor detected the color of the note and sent the color value to Arduino which calculated the currency value based on the color of the note.</li>
+                        </ul>
+                    </div>
+                    <div class="project-item">
+                        <h3 class="project-title" contenteditable="true">Electronic Pet Food Feeder, 2 Months</h3>
+                        <ul class="project-details">
+                            <li contenteditable="true">The Pet Feeder was made to set time and date at which the pet should be given food</li>
+                            <li contenteditable="true">According to the pet's eating schedule specific time could be set up at which the device dropped and filled the food bowl automatically</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section extra-curricular-section">
+                    <h2 class="section-title">EXTRA-CURRICULAR ACTIVITY</h2>
+                    <ul class="activity-list">
+                        <li contenteditable="true">Attended a webinar on "Introduction to Arduino"</li>
+                        <li contenteditable="true">Staked in Walkathon by "Gyan Foundation" for all the support and contribution towards "Pace Against Poverty"</li>
+                    </ul>
+                </section>
+
+                <section class="section soft-skills-section">
+                    <h2 class="section-title">SOFT SKILLS</h2>
+                    <ul class="skill-list">
+                        <li contenteditable="true">Communication</li>
+                        <li contenteditable="true">Teamwork</li>
+                        <li contenteditable="true">Problem Solving</li>
+                        <li contenteditable="true">Adaptability</li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </div>
+ 
+    <div class="download-buttons-container">
+        <button id="downloadPdf" class="download-button">Download Resume as PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // PNG download functionality
+            document.getElementById('downloadPng').addEventListener('click', function() {
+                const element = document.getElementById('resume-content');
+                html2canvas(element, {
+                    scale: 2, // Increase scale for better resolution
+                    useCORS: true, // Required for images (if any) loaded from different origins
+                    logging: true // Enable logging for debugging
+                }).then(function(canvas) {
+                    const link = document.createElement('a');
+                    link.download = 'Resume.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+
+            // PDF download functionality
+            document.getElementById('downloadPdf').addEventListener('click', function() {
+                const element = document.getElementById('resume-content');
+                html2canvas(element, {
+                    scale: 2, // Increase scale for better resolution in PDF
+                    useCORS: true,
+                    logging: true
+                }).then(function(canvas) {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' for portrait, 'mm' for millimeters, 'a4' for A4 size
+
+                    const imgWidth = 210; // A4 width in mm
+                    const pageHeight = 297; // A4 height in mm
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    // If the content is taller than one A4 page, add new pages
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        pdf.addPage();
+                        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    pdf.save('Resume.pdf'); // Changed filename to Resume.pdf
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editable Resume - Vrushali Bhangude</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .editable {
+      outline: none;
+      border-bottom: 1px dashed #ccc;
+      padding: 2px;
+    }
+    .btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+    <div style="text-align:center; margin-top: 20px;">
+  <button class="btn" onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<div class="container" id="resume">
+  <h1 contenteditable="true" class="editable">TOUR NAME</h1>
+  <p contenteditable="true" class="editable">Pune, Maharashtra | +91-73XXXXXXXX | example2@gmail.com</p>
+  <p contenteditable="true" class="editable">LinkedIn: example-7101732b1 | GitHub: ABC-xyz</p>
+
+  <div class="section">
+    <h2>Education</h2>
+    <p contenteditable="true" class="editable">
+      <strong>Savitribai Phule Pune University</strong> (2022 – 2025)<br>
+      BSc in Computer Science – CGPA: 8.91
+    </p>
+    <p contenteditable="true" class="editable">
+      <strong>Takshshila Junior College, Dedgaon</strong> (2020 – 2022)<br>
+      HSC – 84%
+    </p>
+    <p contenteditable="true" class="editable">
+      <strong>New English High School, Maka</strong> (2019 – 2020)<br>
+      SSC – 80%
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Internship</h2>
+    <p contenteditable="true" class="editable">
+      <strong>Jeevan Consultancy Services Pvt. Ltd.</strong> (April 2024 – August 2024)<br>
+      Web Developer Intern – Worked on front-end and back-end development, delivering responsive websites.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Projects</h2>
+    <p contenteditable="true" class="editable">
+      <strong>ChatAI</strong> – React, Node.js, MongoDB<br>
+      Developed AI Chatbot using Gemini API. Features: dark/light mode, context-aware UX.<br>
+      <a href="https://chatgpt-ai-chat-application.netlify.app/" target="_blank">Project Link</a>
+    </p>
+    <p contenteditable="true" class="editable">
+      <strong>Virtual Assistant</strong> – JavaScript<br>
+      Voice interaction assistant with real-time API.<br>
+      <a href="https://own-virtual-assistant.netlify.app/" target="_blank">Project Link</a>
+    </p>
+    <p contenteditable="true" class="editable">
+      <strong>Online Learning Platform</strong><br>
+      Added authentication and quizzes to enhance learning UX.<br>
+      <a href="https://onlinelearningplatform1.netlify.app/" target="_blank">Project Link</a>
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Technical Skills</h2>
+    <p contenteditable="true" class="editable">
+      Python, Java, C, C++, JavaScript, SQL, MongoDB, Git, GitHub, VS Code, ReactJS, Node.js, ExpressJS, HTML, CSS
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Certifications</h2>
+    <p contenteditable="true" class="editable">
+      • 2nd Prize – Brilliant Computer Bird Championship<br>
+      • Kaushalya C++ Certification<br>
+      • Java Certification<br>
+      • Social(SSOC) Season 3
+    </p>
+  </div>
+</div>
+
+
+
+<script>
+  function downloadPDF() {
+    const resume = document.getElementById("resume");
+    html2pdf().from(resume).save("Vrushali_Bhangude_Resume.pdf");
+  }
+</script>
+
+</body>
+</html>

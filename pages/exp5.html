@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience Resume</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .resume-container {
+            width: 8.5in; /* Standard letter size width */
+            height: 1300px; /* Standard letter size height */
+            padding: 0.75in;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Header Section */
+        .header-section {
+            margin-bottom: 20px;
+        }
+
+        .header-section h1 {
+            font-size: 28pt;
+            margin: 0;
+            color: #333;
+            font-weight: normal; /* To match the image more closely */
+        }
+
+        .header-section .title {
+            font-size: 11pt;
+            color: #666;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .summary {
+            font-size: 9.5pt;
+            line-height: 1.5;
+            color: #555;
+            margin-top: 15px;
+            text-align: justify;
+        }
+
+        /* Contact Info */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px 20px;
+            margin-top: 15px;
+            font-size: 9.5pt;
+            color: #555;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item img {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+        }
+
+        /* Section Title Styles */
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            padding: 3px 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: ' ';
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            background-color: #333; /* Dark square */
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Areas of Expertise */
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .tag {
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            padding: 5px 10px;
+            font-size: 9pt;
+            color: #333;
+        }
+
+        /* Work Experience */
+        .experience-entry {
+            margin-bottom: 15px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10.5pt;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .job-title-company {
+            font-size: 10pt;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .responsibilities-list {
+            list-style-type: disc;
+            margin-left: 20px;
+            padding: 0;
+            font-size: 9.5pt;
+            line-height: 1.4;
+        }
+
+        .responsibilities-list li {
+            margin-bottom: 5px;
+        }
+
+        /* Education */
+        .education-entry {
+            margin-bottom: 10px;
+        }
+
+        .degree {
+            font-size: 10.5pt;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .university {
+            font-size: 10pt;
+            color: #555;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .edu-dates {
+            font-size: 9.5pt;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        /* Editable Styles */
+        .editable {
+            border: 1px dashed transparent;
+            padding: 1px 3px;
+            min-height: 1em; /* Ensure some height even if empty */
+            transition: all 0.1s ease-in-out;
+            border-radius: 2px;
+            cursor: text;
+        }
+
+        .editable:hover {
+            border-color: #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .editable:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: #e6f7ff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Specific editable adjustments */
+        .header-section h1.editable,
+        .section-title.editable {
+            border: none;
+            background-color: transparent;
+        }
+        .header-section h1.editable:hover,
+        .section-title.editable:hover {
+            background-color: transparent;
+        }
+        .header-section h1.editable:focus,
+        .section-title.editable:focus {
+            box-shadow: none;
+            background-color: transparent;
+        }
+
+        .responsibilities-list .editable {
+            display: list-item;
+        }
+        .tag.editable {
+            display: inline-block; /* Ensure tags behave like blocks */
+        }
+
+        .placeholder {
+            color: #bbb;
+            font-style: italic;
+            pointer-events: none; /* Allows click through to parent editable */
+        }
+
+        /* Download Button */
+        .download-button {
+            margin-top: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-bottom:50px;;
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .download-button:active {
+            background-color: #004085;
+            transform: translateY(0);
+        }
+
+        /* Toast Notification */
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px; /* Move up slightly when shown */
+        }
+    </style>
+</head>
+<body>
+
+     <button id="downloadPdf" class="download-button">Download PDF</button>
+
+    <div class="resume-container">
+        <div class="header-section">
+            <h1 class="editable">Your Name</h1>
+            <p class="title editable">Project Manager - Remote</p>
+            <p class="summary editable">
+                Dynamic and goal-driven Project Manager with 10+ years of comprehensive background in providing client-centric solutions across diverse sectors. Equipped with a record of success of project management. Combined with demonstrated abilities in project coordination, team building, planning, scheduling, cost analysis, procurement, quality calculations, and quality assurance. Looking for an opportunity to apply my project management, remote skills and grow professionally.
+            </p><hr>
+            <div class="contact-info-grid">
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" alt="Email Icon"/>
+                    <span class="editable">chris.gno@resume.com</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/phone--v1.png" alt="Phone Icon"/>
+                    <span class="editable">123 332 4141</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/marker.png" alt="Location Icon"/>
+                    <span class="editable">Oslo, Working Remotely</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/domain.png" alt="Website Icon"/>
+                    <span class="editable">chris-flims.com</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/linkedin.png" alt="LinkedIn Icon"/>
+                    <span class="editable">linkedin.com/in/chris.flims</span>
+                </div>
+                <div class="contact-item">
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/medium-logo.png" alt="Medium Icon"/>
+                    <span class="editable">medium.com/@chris.flims</span>
+                </div>
+            </div>
+        </div><hr>
+
+        <div class="section">
+            <div class="section-title">AREAS OF EXPERTISE</div>
+            <div class="expertise-tags">
+                <span class="tag editable">Project Analysis</span>
+                <span class="tag editable">JIRA</span>
+                <span class="tag editable">GitHub</span>
+                <span class="tag editable">CMS</span>
+                <span class="tag editable">Data Analysis</span>
+                <span class="tag editable">Workforce Management & Coaching</span>
+                <span class="tag editable">Agile</span>
+                <span class="tag editable">KPI Management</span>
+                <span class="tag editable">Stakeholders Engagement</span>
+                <span class="tag editable">Digital Operation Improvement</span>
+                <span class="tag editable">Resource Optimization</span>
+                <span class="tag editable">AI & ML</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">WORK EXPERIENCE</div>
+            <div class="experience-entry">
+                <div class="job-header">
+                    <span class="editable">Project Manager</span>
+                    <span class="editable">GHG Logistics</span>
+                </div>
+                <div class="job-title-company editable">2014 - Present</div>
+                <ul class="responsibilities-list">
+                    <li class="editable">Oversee responsibility for the management of multiple technical initiatives, while establishing and maintaining general quality assurance and optimum process flow, therefore improving overall company growth.</li>
+                    <li class="editable">Develop overall implementation approach, service strategy, proposal plan, consistent system integration, and service strategy for all projects, increasing the company's productivity by 30%.</li>
+                    <li class="editable">Initiate PMO directory and KPI reporting improvement, system migrations, and application development.</li>
+                    <li class="editable">Follow up with clients to ensure 100% customer satisfaction with existing product lines and services.</li>
+                    <li class="editable">Monitor every project's progress from design to implementation while steadily resolving issues on time on 95% of the cases.</li>
+                </ul>
+            </div>
+            <div class="experience-entry">
+                <div class="job-header">
+                    <span class="editable">Project Manager</span>
+                    <span class="editable">Amazing Creations International</span>
+                </div>
+                <div class="job-title-company editable">03/2016 - 12/2020</div>
+                <ul class="responsibilities-list">
+                    <li class="editable">Tracked website performance and recommended dynamic optimizations ensuring staying within the project budget for 40 out of 45 projects.</li>
+                    <li class="editable">Generate in-depth reports regarding variances and forecasting of the timeline, project scope, and budget for 45 projects.</li>
+                    <li class="editable">Establish efficient coordination between departments that increased the efficiency of communications by 35% throughout the project.</li>
+                </ul>
+            </div>
+            <div class="experience-entry">
+                <div class="job-header">
+                    <span class="editable">Assistant Project Manager</span>
+                    <span class="editable">Sunshine Big3 Enterprise</span>
+                </div>
+                <div class="job-title-company editable">06/2012 - 02/2015</div>
+                <ul class="responsibilities-list">
+                    <li class="editable">Demonstrated cross-functionality by serving as a subject expert/proposal expert/core team member to review proposals.</li>
+                    <li class="editable">Offered hands-on assistance to customers, assessing needs, and maintaining current knowledge of consumer preferences.</li>
+                    <li class="editable">Managed opening and closing procedures and recommended changes to enhance the efficiency of daily activities.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">EDUCATION</div>
+            <div class="education-entry">
+                <div class="degree editable">Master of Science in Project Management</div>
+                <div class="university editable">Trondheim University</div>
+                <div class="edu-dates editable">2012 - 2014</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="toast" id="toast">Resume downloaded successfully!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Editable Content Functionality ---
+            const editables = document.querySelectorAll('.editable');
+            editables.forEach(element => {
+                element.setAttribute('contenteditable', 'true');
+
+                // Add placeholder functionality
+                const checkPlaceholder = () => {
+                    if (element.textContent.trim() === '' && !element.querySelector('.placeholder')) {
+                        const placeholderSpan = document.createElement('span');
+                        placeholderSpan.classList.add('placeholder');
+                        placeholderSpan.textContent = 'Click to edit';
+                        element.appendChild(placeholderSpan);
+                    } else if (element.textContent.trim() !== '' && element.querySelector('.placeholder')) {
+                        element.removeChild(element.querySelector('.placeholder'));
+                    }
+                };
+
+                checkPlaceholder(); // Initial check on load
+
+                element.addEventListener('focus', function() {
+                    const placeholder = this.querySelector('.placeholder');
+                    if (placeholder) {
+                        this.innerHTML = ''; // Clear content including placeholder
+                    }
+                });
+
+                element.addEventListener('blur', checkPlaceholder); // Re-check on blur
+            });
+
+            // --- PDF Download Functionality ---
+            const downloadPdfButton = document.getElementById('downloadPdf');
+            const resumeContainer = document.querySelector('.resume-container');
+            const toast = document.getElementById('toast');
+
+            downloadPdfButton.addEventListener('click', () => {
+                // Temporarily remove contenteditable and placeholders for cleaner PDF
+                editables.forEach(el => el.removeAttribute('contenteditable'));
+                document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'none');
+
+                const options = {
+                    margin: [0.5, 0.5, 0.5, 0.5], // Top, Left, Bottom, Right margins in inches
+                    filename: 'Experience_Resume.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        allowTaint: true
+                    },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().set(options).from(resumeContainer).save().then(() => {
+                    // Re-add contenteditable and placeholders after PDF generation
+                    editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+                    document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'inline'); // Or block/inline-block depending on element
+                    showToast('Resume downloaded successfully!');
+                }).catch(error => {
+                    console.error("Error generating PDF:", error);
+                    // Ensure editable is re-added even on error
+                    editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+                    document.querySelectorAll('.placeholder').forEach(p => p.style.display = 'inline');
+                    showToast('Error downloading resume.', true);
+                });
+            });
+
+            // --- Toast Notification Function ---
+            function showToast(message, isError = false) {
+                toast.textContent = message;
+                if (isError) {
+                    toast.style.backgroundColor = '#dc3545'; /* Red for error */
+                } else {
+                    toast.style.backgroundColor = '#28a745'; /* Green for success */
+                }
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000); /* Hide after 3 seconds */
+            }
+        });
+    </script>
+</body>
+</html>
